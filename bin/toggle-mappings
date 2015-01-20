@@ -1,0 +1,19 @@
+#!/bin/sh
+
+MAPPINGS_ENABLED=~/.MAPPINGS_ENABLED
+
+if [ -f $MAPPINGS_ENABLED ]; then
+  rm $MAPPINGS_ENABLED
+  #killall xcape
+  setxkbmap -layout us -variant intl
+  notify-send 'Mappings disabled!'
+else
+  touch $MAPPINGS_ENABLED
+  xmodmap -e "remove Lock = Caps_Lock"
+  xmodmap -e "remove Control = Control_L"
+  xmodmap -e "keysym Control_L = dead_grave dead_tilde"
+  xmodmap -e "keysym Caps_Lock = Control_L"
+  xmodmap -e "add Control = Control_L "
+  #xcape -e "Control_L=Control_L|F"
+  notify-send 'Mappings enabled!'
+fi
