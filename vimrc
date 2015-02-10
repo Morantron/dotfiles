@@ -159,7 +159,7 @@
   \   'fallback': 'find %s -type f'
   \ }
 
-" Vimux conf
+" Tmux stuff
   let g:VimuxUseNearest = 1
 
   function! s:get_visual_selection()
@@ -184,7 +184,6 @@
     endif
 
     call VimuxSendText(@@)
-    call VimuxSendKeys("Enter")
 
     let @@ = reg_save
   endfunction
@@ -192,6 +191,9 @@
   " If text is selected, save it in the v buffer and send that buffer it to tmux
   nmap \vs :set opfunc=SendToNearestPane<CR>g@
   vmap \vs :<C-U>call SendToNearestPane(visualmode(), 1)<CR>
+
+  " Remap increment ( is my tmux prefix :B )
+  nnoremap <C-I> <C-A>
 
 " Buffergator conf & mappings ( to be removed )
   let g:buffergator_sort_regime = 'basename'
