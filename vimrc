@@ -49,6 +49,7 @@
   Bundle 'kien/ctrlp.vim'
   Bundle 'Morantron/morankai'
   Bundle 'mattn/emmet-vim'
+  Bundle 'w0ng/vim-hybrid'
   Bundle 'sjl/gundo.vim'
   "Bundle 'walm/jshint.vim'
   Bundle 'croaker/mustang-vim'
@@ -86,7 +87,7 @@
   call vundle#end()            " required
 
 " Colors
-  colors morankai
+  colors hybrid
 
 
 " General mappings
