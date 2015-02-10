@@ -132,6 +132,9 @@
   " case sensitive search
   nnoremap ,/ :/\C
 
+  " cd to current buffer directory
+  nnoremap <leader>cd :cd %:p:h<cr>
+
 " NERDTree conf & mappings
   let NERDTreeShowBookmarks=1
   nnoremap <leader><leader>t :NERDTreeToggle<CR>
