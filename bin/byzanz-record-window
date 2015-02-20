@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#bizanz-record-window DELAY DURATION
+
 #Blatantly stolen from: https://gist.github.com/lucy/3042755
 
 if ! which xwininfo &>/dev/null;  then
