@@ -307,6 +307,11 @@
   " die hash rockets
   let @h= ":s/:\\(\\w\\+\\) =>/\\1:/g"
 
+" Custom functions
+  function! RelPath(toFile)
+    execute ":r!python -c \"import os.path; print os.path.relpath('" . a:toFile . "', '%')\""
+  endfunction
+
 " Fat fingers
   iabbrev ocurrence occurrence
   iabbrev heigth height
