@@ -38,7 +38,7 @@
   set incsearch
   set autoread
   set ttyfast
-  set shell=/bin/sh
+  set shell=/bin/bash
   set term=screen-256color
   set backupcopy=yes
 
