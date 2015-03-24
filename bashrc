@@ -105,9 +105,7 @@ bind -m vi-insert "\C-l":clear-screen
 set show-mode-in-prompt off
 
 #git stuff
-if [ -f $HOME/git-completion.bash ]; then
-  source $HOME/git-completion.bash
-fi
+source ~/git-completion.bash
 
 #fzf stuff
 source ~/.fzf.bash
