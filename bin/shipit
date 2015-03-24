@@ -2,4 +2,4 @@
 
 toggle-mappings
 toggle-mappings
-switch-wm
+dconf write /org/gnome/desktop/interface/enable-animations false
