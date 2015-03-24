@@ -191,9 +191,6 @@
   nmap \vs :set opfunc=SendToNearestPane<CR>g@
   vmap \vs :<C-U>call SendToNearestPane(visualmode(), 1)<CR>
 
-  " Remap increment ( is my tmux prefix :B )
-  nnoremap <C-I> <C-A>
-
 " Buffergator conf & mappings ( to be removed )
   let g:buffergator_sort_regime = 'basename'
   let g:buffergator_autoupdate = 1
