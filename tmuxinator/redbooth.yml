@@ -1,34 +1,35 @@
-# ~/.tmuxinator/redbooth-chiringuito.yml
+# ~/.tmuxinator/redbooth.yml
 
 name: redbooth
 root: ~/hacking/redbooth
 
-# Optional tmux socket
-# socket_name: foo
-
-# Runs before everything. Use it to start daemons etc.
-# pre: sudo /etc/rc.d/mysqld start
-
-# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
-# pre_window: rbenv shell 2.0.0-p247
-
-# Pass command line options to tmux. Useful for specifying a different tmux.conf.
-# tmux_options: -f ~/.tmux.mac.conf
-
-# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
-# tmux_command: byobu
-
 windows:
-  - rails:
+  - bash:
+    -
+  - frontend:
+    - cd teambox-frontend
+    - vim
+  - backend:
     - cd teambox-hosted
-    - bundle exec rails server -e development
+    - vim
   - grunt:
     - cd teambox-frontend
-    - ./development.js
-  - vim-frontend:
-    - cd teambox-frontend
-    - vim
-  - vim-hosted:
-    - cd teambox-hosted
-    - vim
-  - bash:
+    - ./development.js --ludicrous
+  - servers:
+      layout: main-horizontal
+      panes:
+        - zeus-server:
+          - cd teambox-hosted
+          - zeus-please server
+        - zeus:
+          - cd teambox-hosted
+          - zeus start
+        - elastic-search:
+          - sudo -i /usr/share/elasticsearch/bin/elasticsearch
+        - parrot:
+          - cd parrot
+          - npm start
+        - iframely:
+          - cd iframely
+          - npm start
+
