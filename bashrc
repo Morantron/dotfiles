@@ -110,6 +110,9 @@ source ~/git-completion.bash
 #fzf stuff
 source ~/.fzf.bash
 
+#autoenv for python
+source /usr/local/bin/activate.sh
+
 #rbenv stuff
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
