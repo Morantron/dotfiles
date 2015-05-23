@@ -135,12 +135,12 @@
   nnoremap <leader>cd :cd %:p:h<cr>
 
 " NERDTree conf & mappings
-  let NERDTreeShowBookmarks=1
-  nnoremap <leader><leader>t :NERDTreeToggle<CR>
+  let g:NERDTreeWinPos = "right"
+  nnoremap <C-@> :NERDTreeToggle<CR>
   nnoremap <leader><leader>f :NERDTreeFind<CR>
-  nnoremap <space> :CtrlPMixed<CR>
 
 " CtrlP conf & mappings
+  nnoremap <space> :CtrlPMixed<CR>
   let g:ctrlp_map = '<c-t>'
   let g:ctrlp_map = '<leader>t'
   let g:ctrlp_mruf_relative = 1
