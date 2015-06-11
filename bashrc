@@ -89,6 +89,8 @@ alias gg='git grep -E --color=auto'
 alias dog='pygmentize -g'
 alias cdh='cd !$:h'
 alias cdt='cd !$:t'
+alias pomodoro='pomojs --log ~/.pomo.log --tmux'
+
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -102,7 +104,6 @@ fi
 # vi keybindings with clear screen
 set -o vi
 bind -m vi-insert "\C-l":clear-screen
-set show-mode-in-prompt off
 
 #git stuff
 source ~/git-completion.bash
