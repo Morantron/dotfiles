@@ -32,4 +32,10 @@ windows:
         - iframely:
           - cd iframely
           - npm start
-
+  - pomo:
+      layout: even-horizontal
+      panes:
+        - pomo-cli:
+          - echo "Type 'pomodoro 25 5' to start"
+        - pomo-log:
+          - watch cat ~/.pomo.log
