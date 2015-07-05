@@ -220,9 +220,11 @@
   nnoremap <leader>12 :diffget<CR>
   nnoremap <leader>21 :diffput<CR>
   nnoremap <leader>gs :Gstatus<CR>
-  nnoremap <leader>gg :Ggrep -i 
+  nnoremap <leader>gg :Ggr -i 
+  :command -nargs=+ Ggr execute 'silent Ggrep!' <q-args> | cw | redraw!
+
   "git grep word under cursor
-  nnoremap \g yiw:Ggrep <C-r>"<cr>
+  nnoremap \g :Ggr <C-R><C-W><CR>
   nnoremap \n :cnext<cr>
   nnoremap \p :cprev<cr>
 
