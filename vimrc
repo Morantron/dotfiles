@@ -135,14 +135,12 @@
   nnoremap <leader>cd :cd %:p:h<cr>
 
 " NERDTree conf & mappings
-  let g:NERDTreeWinPos = "right"
   nnoremap <C-@> :NERDTreeToggle<CR>
   nnoremap <leader><leader>f :NERDTreeFind<CR>
 
 " CtrlP conf & mappings
   nnoremap <space> :CtrlPMixed<CR>
   let g:ctrlp_map = '<c-t>'
-  let g:ctrlp_map = '<leader>t'
   let g:ctrlp_mruf_relative = 1
   let g:ctrlp_prompt_mappings = {
   \ 'PrtSelectMove("j")':   ['<c-n>', '<down>'],
