@@ -1,6 +1,68 @@
-" General settings
+" init vundle
+  set rtp+=~/.vim/bundle/Vundle.vim
+  "set rtp+=~/.fzf
+  filetype off                  " required by vundle
+
+" Plugins
+  call vundle#begin()
+  Bundle 'Soares/butane.vim'
+  Bundle 'kien/ctrlp.vim'
+  "Bundle 'Morantron/morankai'
+  Bundle 'mattn/emmet-vim'
+  Bundle 'Morantron/vim-hybrid'
+  Bundle 'sjl/gundo.vim'
+  Bundle 'croaker/mustang-vim'
+  Bundle 'scrooloose/nerdcommenter'
+  Bundle 'scrooloose/nerdtree'
+  Bundle 'mtth/scratch.vim'
+  Bundle 'scrooloose/syntastic'
+  Bundle 'groenewege/vim-less'
+  Bundle 'SirVer/ultisnips'
+  Bundle 'honza/vim-snippets'
+  Bundle 'Morantron/my-snippets'
+  Bundle 'bling/vim-airline'
+  "Bundle 'jeetsukumaran/vim-buffergator'
+  Bundle 'tpope/vim-dispatch'
+  "Bundle 'monokrome/vim-testdrive'
+  Bundle 'tpope/vim-fugitive'
+  Bundle 'tpope/vim-vinegar'
+  Bundle 'nathanaelkane/vim-indent-guides'
+  Bundle 'digitaltoad/vim-jade'
+  Bundle 'pangloss/vim-javascript.git'
+  Bundle 'rodjek/vim-puppet'
+  Bundle 'itspriddle/vim-jekyll'
+  Bundle 'tpope/vim-rails'
+  Bundle 'thoughtbot/vim-rspec'
+  Bundle 'tpope/vim-repeat'
+  Bundle 'tpope/vim-surround'
+  Bundle 'tpope/vim-abolish'
+  Bundle 'szw/vim-tags'
+  Bundle 'christoomey/vim-tmux-navigator.git'
+  Bundle 'milkypostman/vim-togglelist'
+  Bundle 'bronson/vim-trailing-whitespace'
+  Bundle 'vim-scripts/C64.vim'
+  Bundle 'benmills/vimux'
+  Bundle 'kchmck/vim-coffee-script'
+  Bundle 'NLKNguyen/papercolor-theme'
+  Bundle 'vim-scripts/IndentAnything'
+  Bundle 'kien/rainbow_parentheses.vim'
+  Bundle 'guns/vim-clojure-highlight'
+  Bundle 'diepm/vim-rest-console'
+  "Bundle 'suan/vim-instant-markdown'
+
+ "only installing this for cacaview nerdy stuff
+  Bundle 'vim-scripts/AnsiEsc.vim'
+
+
+  if has("nvim")
+    Bundle 'neovim/node-host'
+    "Bundle 'snoe/nvim-parinfer.js'
+  end
+
+  call vundle#end()            " required
+
+ " General settings
   set nocompatible              " be iMproved, required
-  filetype off                  " required
   set ai
   set expandtab
   set tabstop=2
@@ -10,12 +72,10 @@
   set encoding=utf-8
   set mouse=a
   syntax on
-  filetype on
-  filetype plugin on
   filetype plugin indent on
-  set cindent
-  set smartindent
-  set autoindent
+  "set cindent
+  "set smartindent
+  "set autoindent
   set expandtab
   set undofile
   set undodir=~/.vim/undo
@@ -39,55 +99,18 @@
   set autoread
   set ttyfast
   set shell=/bin/bash
-  set term=screen-256color
-  set backupcopy=yes
 
-" Plugins
-  set rtp+=~/.vim/bundle/Vundle.vim
-  call vundle#begin()
-  Bundle 'Soares/butane.vim'
-  Bundle 'kien/ctrlp.vim'
-  Bundle 'Morantron/morankai'
-  Bundle 'mattn/emmet-vim'
-  Bundle 'w0ng/vim-hybrid'
-  Bundle 'sjl/gundo.vim'
-  Bundle 'croaker/mustang-vim'
-  Bundle 'scrooloose/nerdcommenter'
-  Bundle 'scrooloose/nerdtree'
-  Bundle 'vim-scripts/scratch.vim'
-  Bundle 'scrooloose/syntastic'
-  Bundle 'groenewege/vim-less'
-  "Bundle 'marijnh/tern_for_vim'
-  Bundle 'SirVer/ultisnips'
-  Bundle 'Morantron/my-snippets'
-  Bundle 'honza/vim-snippets'
-  Bundle 'bling/vim-airline'
-  Bundle 'jeetsukumaran/vim-buffergator'
-  Bundle 'tpope/vim-dispatch'
-  Bundle 'monokrome/vim-testdrive'
-  Bundle 'tpope/vim-fugitive'
-  Bundle 'nathanaelkane/vim-indent-guides'
-  Bundle 'digitaltoad/vim-jade'
-  Bundle 'jelera/vim-javascript-syntax.git'
-  Bundle 'rodjek/vim-puppet'
-  Bundle 'itspriddle/vim-jekyll'
-  Bundle 'tpope/vim-rails'
-  Bundle 'thoughtbot/vim-rspec'
-  Bundle 'tpope/vim-repeat'
-  Bundle 'tpope/vim-surround'
-  Bundle 'tpope/vim-abolish'
-  Bundle 'szw/vim-tags'
-  Bundle 'christoomey/vim-tmux-navigator.git'
-  Bundle 'milkypostman/vim-togglelist'
-  Bundle 'bronson/vim-trailing-whitespace'
-  Bundle 'vim-scripts/dbext.vim'
-  Bundle 'vim-scripts/C64.vim'
-  Bundle 'benmills/vimux'
-  call vundle#end()            " required
+  if !has("nvim")
+    set term=screen-256color
+  endif
+
+  set backupcopy=yes
+  set omnifunc=syntaxcomplete#Complete
 
 " Colors
+  set background=dark
   colors hybrid
-
+  "colors C64
 
 " General mappings
   let mapleader=","
@@ -103,27 +126,47 @@
   " change conf
   nnoremap <leader>rc :e ~/.vimrc<CR>
 
-  " edit javascript snippets
-  nnoremap <leader>js :e ~/.vim/bundle/my-snippets/UltiSnips/javascript.snippets<CR>
-
   " Buffer change
   nnoremap <C-n> :bnext<CR>
   nnoremap <C-p> :bprev<CR>
 
   " Window navigation
-  nnoremap <C-h> <C-W>h
-  nnoremap <C-j> <C-W>j
-  nnoremap <C-k> <C-W>k
-  nnoremap <C-l> <C-W>l
+  nnoremap <C-h> <C-w>h
+  nnoremap <C-j> <C-w>j
+  nnoremap <C-k> <C-w>k
+  nnoremap <C-l> <C-w>l
+
+  if has('nvim')
+    " XXX: workaround for libtermkeys problem in tmux
+    if exists('$TMUX')
+      nmap <BS> <C-h>
+    end
+
+    " Terminal navigation
+    tnoremap <Esc> <C-\><C-n>
+
+    nnoremap <C-h> :echo "wat H"
+    nnoremap <C-j> :echo "wat J"
+    nnoremap <C-k> :echo "wat K"
+    nnoremap <C-l> :echo "wat L"
+
+    "tnoremap <C-h> <C-\><C-n><C-w><C-h>
+    "tnoremap <C-j> <C-\><C-n><C-w><C-j>
+    "tnoremap <C-k> <C-\><C-n><C-w><C-k>
+    "tnoremap <C-l> <C-\><C-n><C-w><C-l>
+
+    tnoremap <C-f><C-l> <C-l>
+    au WinEnter term://* startinsert
+
+    " enable clipboard
+    set clipboard+=unnamedplus
+  endif
+
+  " Airline
+  let g:airline#extensions#tabline#enabled = 1
 
   " ctags
   nnoremap <leader>ct :!ctags -R *<CR>
-
-  "scratch
-  nnoremap <leader>ss :Scratch<CR>
-
-  " makemake
-  nnoremap \\ :Make<CR>
 
   " run current buffer in vimscript
   nnoremap <leader>w :w \| :source % <cr>
@@ -137,8 +180,11 @@
 " NERDTree conf & mappings
   nnoremap <C-@> :NERDTreeToggle<CR>
   nnoremap <leader><leader>f :NERDTreeFind<CR>
+  let g:NERDTreeHijackNetrw=1
 
 " CtrlP conf & mappings
+  "nnoremap <space> :FZF<CR>
+
   nnoremap <space> :CtrlPMixed<CR>
   let g:ctrlp_map = '<c-t>'
   let g:ctrlp_mruf_relative = 1
@@ -159,25 +205,18 @@
 " Tmux stuff
   let g:VimuxUseNearest = 1
 
-  function! s:get_visual_selection()
-    " Why is this not a built-in Vim script function?!
-    let [lnum1, col1] = getpos("'<")[1:2]
-    let [lnum2, col2] = getpos("'>")[1:2]
-    let lines = getline(lnum1, lnum2)
-    let lines[-1] = lines[-1][: col2 - (&selection == 'inclusive' ? 1 : 2)]
-    let lines[0] = lines[0][col1 - 1:]
-    return join(lines, "\n")
-  endfunction
-
   function! SendToNearestPane(type, ...)
     let reg_save = @@
+
+    "if exists("g:VimuxRunnerIndex") "use this to open vimux runner
+    "inteligently
 
     if a:0  " Invoked from Visual mode, use gv command.
       silent exe "normal! gvy"
     elseif a:type == 'line'
       silent exe "normal! '[V']y"
     else
-      silent exe "normal! `[v`]y"
+      silent exe "normal! :%y"
     endif
 
     call VimuxSendText(@@)
@@ -185,35 +224,8 @@
     let @@ = reg_save
   endfunction
 
-  " If text is selected, save it in the v buffer and send that buffer it to tmux
-  nmap \vs :set opfunc=SendToNearestPane<CR>g@
-  vmap \vs :<C-U>call SendToNearestPane(visualmode(), 1)<CR>
-
-" Buffergator conf & mappings ( to be removed )
-  let g:buffergator_sort_regime = 'basename'
-  let g:buffergator_autoupdate = 1
-  let g:buffergator_suppress_keymaps = 1
-  nnoremap <leader>b :BuffergatorToggle<CR>
-
-" Powerline/Airline conf
-  let g:airline_powerline_fonts=1
-  let g:airline#extensions#tabline#left_sep = ' '
-  let g:airline#extensions#tabline#left_alt_sep = ' '
-
-  if !exists('g:airline_symbols')
-    let g:airline_symbols = {}
-  endif
-
-  let g:airline#extensions#tabline#enabled = 1
-
-  " unicode symbols ( fucking urxvt )
-  let g:airline_left_sep = '⮀'
-  let g:airline_left_alt_sep = '⮁'
-  let g:airline_right_sep = '⮂'
-  let g:airline_right_alt_sep = '⮃'
-  let g:airline_symbols.branch = '⭠'
-  let g:airline_symbols.readonly = '⭤'
-  let g:airline_symbols.linenr = '⭡'
+  nnoremap \\ :<C-U>call SendToNearestPane(1)<CR>
+  vmap \\ :<C-U>call SendToNearestPane(visualmode(), 1)<CR>
 
 " Fugitive conf & mappings
   nnoremap <leader>gd :Gdiff<CR>
@@ -225,17 +237,27 @@
 
   "git grep word under cursor
   nnoremap \g :Ggr <C-R><C-W><CR>
-  nnoremap \n :cnext<cr>
-  nnoremap \p :cprev<cr>
 
 " Syntastic conf
   let g:syntastic_error_symbol = '●'
-  let g:syntastic_javascript_checkers = ['jsxhint']
+  let g:syntastic_javascript_checkers = ['eslint']
+  let g:syntastic_always_populate_loc_list = 1
+  nnoremap ]e :lnext<cr>
+  nnoremap [e :lprev<cr>
 
 " UltiSnips conf
   let g:UltiSnipsExpandTrigger="<tab>"
   let g:UltiSnipsJumpForwardTrigger="<c-J>"
   let g:UltiSnipsJumpBackwardTrigger="<c-K>"
+  "let g:UltiSnipsSnippetDirectories=["~/.vim/bundle/vim-snippets/UltiSnips", "~/.vim/bundle/my-snippets/UltiSnips"]
+
+" Rainbow parenthesis
+  nnoremap <leader>rp :RainbowParenthesesToggle<cr>
+  let g:rainbow_active = 1
+  au VimEnter * RainbowParenthesesToggle
+  au Syntax * RainbowParenthesesLoadRound
+  au Syntax * RainbowParenthesesLoadSquare
+  au Syntax * RainbowParenthesesLoadBraces
 
 " Redbooth stuff ( TODO move to plugin )
   nnoremap \d :call PseudoGotoDef()<cr>
@@ -286,16 +308,30 @@
     endif
   endfunction
 
+" Rainbow
+  nnoremap <leader>rp :RainbowParenthesesToggle<CR>
+
+" Rest console
+  let g:vrc_trigger = '<C-s>'
+  let s:vrc_auto_format_response_patterns = {
+  \   '*': 'jq "."',
+  \}
+  autocmd BufWritePost *.rest call VrcQuery()
+
 " Rspec conf
   let g:rspec_command = "compiler rspec | set makeprg=zeus | Make rspec {spec}"
   map \f :call RunCurrentSpecFile()<CR>
-
-" Dbext conf
-  let g:dbext_default_profile_teambox = 'type=MYSQL:user=root:dbname=teambox_developmenet'
-
+  map \s :call RunNearestSpec()<CR>
+  let g:NERDCustomDelimiters = {
+      \ 'rest': { 'left': '#' },
+  \ }
 
 " Ruby stuff
   au BufRead,BufNewFile *.rabl setf ruby
+
+" Markdown preview
+  let g:instant_markdown_slow = 1
+  autocmd BufWritePost *.md silent exec "!cat % | curl -s -XPUT -T - http://localhost:8090"
 
 
 " Macros stuff

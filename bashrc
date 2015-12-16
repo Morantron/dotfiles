@@ -43,7 +43,7 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -56,8 +56,15 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+# Get the Git branch
+parse_git_branch() {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    #export PS1="\n\[$(tput bold)\]\[$(tput setaf 5)\]➜ \[$(tput setaf 6)\]\w\[$(tput setaf 3)\]\$(parse_git_branch) \[$(tput sgr0)\]"
+    export PS1="\n\[$(tput bold)\]\[$(tput setaf 5)\]➜ \[$(tput setaf 6)\]\w\[$(tput setaf 3)\] \[$(tput sgr0)\]"
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -86,11 +93,11 @@ fi
 
 # some more ls aliases
 alias gg='git grep -E --color=auto'
+alias vim='nvim'
 alias dog='pygmentize -g'
 alias cdh='cd !$:h'
 alias cdt='cd !$:t'
 alias pomodoro='pomojs --log ~/.pomo.log --tmux'
-
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -101,21 +108,33 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+#if [ -f ~/.bash_profile ]; then
+    #. ~/.bash_profile
+#fi
+
 # vi keybindings with clear screen
 set -o vi
 bind -m vi-insert "\C-l":clear-screen
 
 #git stuff
-source ~/git-completion.bash
+if [ -f ~/.git-completion.bash ]; then
+  . ~/.git-completion.bash
+fi
 
 #fzf stuff
-source ~/.fzf.bash
+if [ -f /etc/profile.d/fzf.bash ]; then
+  . /etc/profile.d/fzf.bash
+fi
 
 #autoenv for python
-source /usr/local/bin/activate.sh
+if [ -f /usr/local/bin/activate.sh ]; then
+  . /usr/local/bin/activate.sh
+fi
 
-#rbenv stuff
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+. /usr/share/nvm/init-nvm.sh
 
-#export PS1="\u@\h \$(vi-mode-prompt)> "
+function bd() {
+  cd $(cat ~/.bookmarks | fzf-tmux)
+}
+
+[[ -f $HOME/.gemrc_local ]] && export GEMRC=$HOME/.gemrc_local

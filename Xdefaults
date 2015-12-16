@@ -10,8 +10,8 @@ Xft.hintstyle:              hintslight
 ! Fonts
 URxvt.allow_bold:           false
 
-!URxvt.font:xft:Inconsolata:bold:size=10
-URxvt.font:xft:Envy Code R for Powerline:normal:size=10
+!URxvt.font:xft:Envy Code R:normal:size=10
+!URxvt.font:xft:Envy Code R for Powerline:normal:size=10
 
 ! Scrollbar
 URxvt.scrollStyle:          rxvt

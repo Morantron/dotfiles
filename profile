@@ -21,11 +21,5 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-
-# Android devtools
-export PATH=$PATH:$HOME/hacking/android-sdk-linux/platform-tools
-export PATH=$PATH:$HOME/hacking/android-sdk-linux/tools
-export ANDROID_HOME=/hacking/android-sdk-linux/
-
 # matrix lock shit
 export LOCKPRG=$HOME/bin/matrix-lock
