@@ -1,67 +1,56 @@
-" init vundle
-  set rtp+=~/.vim/bundle/Vundle.vim
-  "set rtp+=~/.fzf
-  filetype off                  " required by vundle
-
-" Plugins
-  call vundle#begin()
-  Bundle 'Soares/butane.vim'
-  Bundle 'kien/ctrlp.vim'
-  "Bundle 'Morantron/morankai'
-  Bundle 'mattn/emmet-vim'
-  Bundle 'Morantron/vim-hybrid'
-  Bundle 'sjl/gundo.vim'
-  Bundle 'croaker/mustang-vim'
-  Bundle 'scrooloose/nerdcommenter'
-  Bundle 'scrooloose/nerdtree'
-  Bundle 'mtth/scratch.vim'
-  Bundle 'scrooloose/syntastic'
-  Bundle 'groenewege/vim-less'
-  Bundle 'SirVer/ultisnips'
-  Bundle 'honza/vim-snippets'
-  Bundle 'Morantron/my-snippets'
-  Bundle 'bling/vim-airline'
-  "Bundle 'jeetsukumaran/vim-buffergator'
-  Bundle 'tpope/vim-dispatch'
-  "Bundle 'monokrome/vim-testdrive'
-  Bundle 'tpope/vim-fugitive'
-  Bundle 'tpope/vim-vinegar'
-  Bundle 'nathanaelkane/vim-indent-guides'
-  Bundle 'digitaltoad/vim-jade'
-  Bundle 'pangloss/vim-javascript.git'
-  Bundle 'rodjek/vim-puppet'
-  Bundle 'itspriddle/vim-jekyll'
-  Bundle 'tpope/vim-rails'
-  Bundle 'thoughtbot/vim-rspec'
-  Bundle 'tpope/vim-repeat'
-  Bundle 'tpope/vim-surround'
-  Bundle 'tpope/vim-abolish'
-  Bundle 'szw/vim-tags'
-  Bundle 'christoomey/vim-tmux-navigator.git'
-  Bundle 'milkypostman/vim-togglelist'
-  Bundle 'bronson/vim-trailing-whitespace'
-  Bundle 'vim-scripts/C64.vim'
-  Bundle 'benmills/vimux'
-  Bundle 'kchmck/vim-coffee-script'
-  Bundle 'NLKNguyen/papercolor-theme'
-  Bundle 'vim-scripts/IndentAnything'
-  Bundle 'kien/rainbow_parentheses.vim'
-  Bundle 'guns/vim-clojure-highlight'
-  Bundle 'diepm/vim-rest-console'
-  "Bundle 'suan/vim-instant-markdown'
+" Plugins {{{
+  call plug#begin('~/.vim/plugged')
+  Plug 'Soares/butane.vim'
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'junegunn/fzf.vim'
+  Plug 'mattn/emmet-vim'
+  Plug 'Morantron/vim-hybrid'
+  Plug 'croaker/mustang-vim'
+  Plug 'scrooloose/nerdcommenter'
+  Plug 'scrooloose/nerdtree'
+  Plug 'mtth/scratch.vim'
+  Plug 'benekastah/neomake'
+  Plug 'groenewege/vim-less'
+  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' | Plug 'Morantron/my-snippets'
+  Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
+  Plug 'tpope/vim-dispatch'
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-vinegar'
+  Plug 'nathanaelkane/vim-indent-guides'
+  Plug 'digitaltoad/vim-jade'
+  Plug 'pangloss/vim-javascript'
+  Plug 'rodjek/vim-puppet'
+  Plug 'itspriddle/vim-jekyll'
+  Plug 'tpope/vim-rails'
+  Plug 'thoughtbot/vim-rspec'
+  Plug 'tpope/vim-repeat'
+  Plug 'tpope/vim-abolish'
+  Plug 'tpope/vim-surround'
+  Plug 'szw/vim-tags'
+  Plug 'christoomey/vim-tmux-navigator'
+  Plug 'milkypostman/vim-togglelist'
+  Plug 'bronson/vim-trailing-whitespace'
+  Plug 'vim-scripts/C64.vim'
+  Plug 'benmills/vimux'
+  Plug 'kchmck/vim-coffee-script'
+  Plug 'NLKNguyen/papercolor-theme'
+  Plug 'vim-scripts/IndentAnything'
+  Plug 'kien/rainbow_parentheses.vim'
+  Plug 'guns/vim-clojure-highlight'
+  Plug 'diepm/vim-rest-console'
+  Plug 'jakobwesthoff/argumentrewrap'
+  Plug 'teoljungberg/vim-grep'
+  Plug 'lokson/ZoomWin'
+  Plug 'vim-scripts/DrawIt'
+  Plug 'itchyny/calendar.vim'
 
  "only installing this for cacaview nerdy stuff
-  Bundle 'vim-scripts/AnsiEsc.vim'
+  Plug 'vim-scripts/AnsiEsc.vim'
 
+  call plug#end()
+" }}}
 
-  if has("nvim")
-    Bundle 'neovim/node-host'
-    "Bundle 'snoe/nvim-parinfer.js'
-  end
-
-  call vundle#end()            " required
-
- " General settings
+" General settings {{{
   set nocompatible              " be iMproved, required
   set ai
   set expandtab
@@ -99,6 +88,7 @@
   set autoread
   set ttyfast
   set shell=/bin/bash
+  set modelines=1 " check last line for additional vim settings ( fold stuff in vimrc )
 
   if !has("nvim")
     set term=screen-256color
@@ -106,16 +96,28 @@
 
   set backupcopy=yes
   set omnifunc=syntaxcomplete#Complete
+" }}}
 
-" Colors
+" Colors {{{
   set background=dark
-  colors hybrid
+  "colors hybrid
   "colors C64
+  colors PaperColor
+" }}}
 
-" General mappings
-  let mapleader=","
+" General mappings {{{
+  let mapleader="\<Space>"
 
   cmap w!! w !sudo tee > /dev/null %
+
+  " Visual mappings
+  vnoremap . :norm .<CR>
+  vnoremap @@ :norm @q<CR>
+  vnoremap <leader>js :!jq "."<CR>
+
+  " Select pasted text
+  "    http://vim.wikia.com/wiki/Selecting_your_pasted_text
+  nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
   " toggle search highlight
   nnoremap <leader>hl :set hlsearch!<CR>
@@ -124,11 +126,35 @@
   nnoremap <leader>qf :call ToggleQuickfixList()<CR>
 
   " change conf
-  nnoremap <leader>rc :e ~/.vimrc<CR>
+  nnoremap <leader>rc :e ~/hacking/dotfiles/vimrc<CR>
+
+  " split by comma
+  vnoremap SS :s/,/,\r/g<CR>gv=
+
+" }}}
+
+" poor man's orgmode {{{
+  function! AddTodo()
+    let todo_path = expand("%") . ":" . line(".")
+    e ~/.notes/TODO.md
+    call append(line('$'), "[ ] " . todo_path)
+    normal G$
+  endfunction
+
+  nnoremap <leader>te :e ~/.notes/TODO.md<cr>
+  nnoremap <leader>ta :call AddTodo()<cr>
+  nnoremap <leader>tm :normal 0lrx<cr>
+" }}}
 
   " Buffer change
   nnoremap <C-n> :bnext<CR>
   nnoremap <C-p> :bprev<CR>
+
+  " Quickfix/location list navigation
+  nnoremap ]e :lnext<cr>
+  nnoremap [e :lprev<cr>
+  nnoremap ]q :cnext<cr>
+  nnoremap [q :cprev<cr>
 
   " Window navigation
   nnoremap <C-h> <C-w>h
@@ -145,18 +171,7 @@
     " Terminal navigation
     tnoremap <Esc> <C-\><C-n>
 
-    nnoremap <C-h> :echo "wat H"
-    nnoremap <C-j> :echo "wat J"
-    nnoremap <C-k> :echo "wat K"
-    nnoremap <C-l> :echo "wat L"
-
-    "tnoremap <C-h> <C-\><C-n><C-w><C-h>
-    "tnoremap <C-j> <C-\><C-n><C-w><C-j>
-    "tnoremap <C-k> <C-\><C-n><C-w><C-k>
-    "tnoremap <C-l> <C-\><C-n><C-w><C-l>
-
     tnoremap <C-f><C-l> <C-l>
-    au WinEnter term://* startinsert
 
     " enable clipboard
     set clipboard+=unnamedplus
@@ -164,43 +179,22 @@
 
   " Airline
   let g:airline#extensions#tabline#enabled = 1
+  let g:airline_powerline_fonts = 1
 
   " ctags
   nnoremap <leader>ct :!ctags -R *<CR>
-
-  " run current buffer in vimscript
-  nnoremap <leader>w :w \| :source % <cr>
-
-  " case sensitive search
-  nnoremap ,/ :/\C
 
   " cd to current buffer directory
   nnoremap <leader>cd :cd %:p:h<cr>
 
 " NERDTree conf & mappings
   nnoremap <C-@> :NERDTreeToggle<CR>
-  nnoremap <leader><leader>f :NERDTreeFind<CR>
+  nnoremap <leader>f :NERDTreeFind<CR>
   let g:NERDTreeHijackNetrw=1
 
-" CtrlP conf & mappings
-  "nnoremap <space> :FZF<CR>
 
-  nnoremap <space> :CtrlPMixed<CR>
-  let g:ctrlp_map = '<c-t>'
-  let g:ctrlp_mruf_relative = 1
-  let g:ctrlp_prompt_mappings = {
-  \ 'PrtSelectMove("j")':   ['<c-n>', '<down>'],
-  \ 'PrtSelectMove("k")':   ['<c-p>', '<up>'],
-  \ 'PrtHistory(-1)':       ['<c-j>'],
-  \ 'PrtHistory(1)':        ['<c-k>'],
-  \ }
-  let g:ctrlp_user_command = {
-  \ 'types': {
-  \   1: ['.git', 'cd %s && git ls-files'],
-  \   2: ['.hg', 'hg --cwd %s locate -I .'],
-  \ },
-  \   'fallback': 'find %s -type f'
-  \ }
+" FZF conf
+  nnoremap <space><space> :FZF<CR>
 
 " Tmux stuff
   let g:VimuxUseNearest = 1
@@ -232,33 +226,27 @@
   nnoremap <leader>12 :diffget<CR>
   nnoremap <leader>21 :diffput<CR>
   nnoremap <leader>gs :Gstatus<CR>
-  nnoremap <leader>gg :Ggr -i 
-  :command -nargs=+ Ggr execute 'silent Ggrep!' <q-args> | cw | redraw!
 
-  "git grep word under cursor
-  nnoremap \g :Ggr <C-R><C-W><CR>
+" vim-grep
+  nnoremap <leader>gg :Grep -i 
+  nnoremap <leader>GG :Grep 
+  nnoremap <leader>gG :Grep 
+  nnoremap <leader>Gg :Grep 
+  nnoremap \g :Grep <C-R><C-W><CR>
 
-" Syntastic conf
-  let g:syntastic_error_symbol = '●'
-  let g:syntastic_javascript_checkers = ['eslint']
-  let g:syntastic_ruby_checkers = ['rubocop']
-  let g:syntastic_always_populate_loc_list = 1
-  nnoremap ]e :lnext<cr>
-  nnoremap [e :lprev<cr>
+" Neomake conf
+  let g:neomake_javascript_enabled_makers = ['eslint']
+  let g:neomake_ruby_enabled_makers = ['rubocop']
+
+  let g:neomake_logfile = "/home/jorge/.neomake.log"
+  autocmd BufWritePost * Neomake
+
 
 " UltiSnips conf
   let g:UltiSnipsExpandTrigger="<tab>"
   let g:UltiSnipsJumpForwardTrigger="<c-J>"
   let g:UltiSnipsJumpBackwardTrigger="<c-K>"
-  "let g:UltiSnipsSnippetDirectories=["~/.vim/bundle/vim-snippets/UltiSnips", "~/.vim/bundle/my-snippets/UltiSnips"]
-
-" Rainbow parenthesis
-  nnoremap <leader>rp :RainbowParenthesesToggle<cr>
-  let g:rainbow_active = 1
-  au VimEnter * RainbowParenthesesToggle
-  au Syntax * RainbowParenthesesLoadRound
-  au Syntax * RainbowParenthesesLoadSquare
-  au Syntax * RainbowParenthesesLoadBraces
+  "let g:UltiSnipsSnippetDirectories=["~/.config/nvim/UltiSnips"]
 
 " Redbooth stuff ( TODO move to plugin )
   nnoremap \d :call PseudoGotoDef()<cr>
@@ -309,8 +297,13 @@
     endif
   endfunction
 
-" Rainbow
-  nnoremap <leader>rp :RainbowParenthesesToggle<CR>
+" Rainbow parenthesis
+  nnoremap <leader>rp :RainbowParenthesesToggle<cr>
+  let g:rainbow_active = 1
+  au VimEnter * RainbowParenthesesToggle
+  au Syntax * RainbowParenthesesLoadRound
+  au Syntax * RainbowParenthesesLoadSquare
+  au Syntax * RainbowParenthesesLoadBraces
 
 " Rest console
   let g:vrc_trigger = '<C-s>'
@@ -319,34 +312,34 @@
   \}
   autocmd BufWritePost *.rest call VrcQuery()
 
-" Rspec conf
-  let g:rspec_command = "compiler rspec | set makeprg=zeus | Make rspec {spec}"
-  map \f :call RunCurrentSpecFile()<CR>
-  map \s :call RunNearestSpec()<CR>
   let g:NERDCustomDelimiters = {
-      \ 'rest': { 'left': '#' },
+  \ 'rest': { 'left': '#' },
   \ }
 
+" Rspec conf
+  let g:rspec_command = "Dispatch bundle exec rspec {spec}"
+  map ,rsf :call RunCurrentSpecFile()<CR>
+  map ,rss :call RunNearestSpec()<CR>
 " Ruby stuff
   au BufRead,BufNewFile *.rabl setf ruby
 
-" Markdown preview
+" Markdown
   let g:instant_markdown_slow = 1
   autocmd BufWritePost *.md silent exec "!cat % | curl -s -XPUT -T - http://localhost:8090"
 
+" Argument rewrap
+  nnoremap <silent> <leader>s :call argumentrewrap#RewrapArguments()<CR>
 
 " Macros stuff
   " split by commas
   let @s= ":s/, /\\r&/g"
   " die hash rockets
   let @h= ":s/:\\(\\w\\+\\) =>/\\1:/g"
+  " go to file under cursor in existing vertical split
+  let @f= "ovgF"
 
 " Custom functions
   function! RelPath(toFile)
     execute ":r!python -c \"import os.path; print os.path.relpath('" . a:toFile . "', '%')\""
   endfunction
-
-" Fat fingers
-  iabbrev ocurrence occurrence
-  iabbrev heigth height
-  iabbrev widht width
+" vim:foldmethod=marker:foldlevel=0
