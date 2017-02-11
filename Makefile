@@ -1,6 +1,8 @@
 
 default:
 	ln -fs $(PWD)/bashrc $(HOME)/.bashrc
+	ln -fs $(PWD)/bash_aliases $(HOME)/.bash_aliases
+	ln -fs $(PWD)/bash_functions $(HOME)/.bash_functions
 	ln -fs $(PWD)/bash_logout $(HOME)/.bash_logout
 	ln -fs $(PWD)/bin $(HOME)/.bin
 	ln -fs $(PWD)/dosbox $(HOME)/.dosbox
