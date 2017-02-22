@@ -20,6 +20,8 @@
   ;frag = magenta bold
   ;old = red bold
   ;new = green bold
+[rerere]
+  enabled = true
 [color "status"]
   added = yellow
   changed = green
