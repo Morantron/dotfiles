@@ -1,5 +1,0 @@
-#!/bin/sh
-
-toggle-mappings
-toggle-mappings
-dconf write /org/gnome/desktop/interface/enable-animations false
