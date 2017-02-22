@@ -33,6 +33,7 @@
   Plug 'szw/vim-tags'
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'milkypostman/vim-togglelist'
+  Plug 'romainl/vim-qf'
   Plug 'bronson/vim-trailing-whitespace'
   Plug 'vim-scripts/C64.vim'
   Plug 'benmills/vimux'
@@ -44,7 +45,7 @@
   "Plug 'guns/vim-sexp'
   Plug 'diepm/vim-rest-console'
   Plug 'jakobwesthoff/argumentrewrap'
-  Plug 'teoljungberg/vim-grep'
+  Plug 'mhinz/vim-grepper'
   Plug 'lokson/ZoomWin'
   Plug 'vim-scripts/DrawIt'
   Plug 'itchyny/calendar.vim'
@@ -257,12 +258,15 @@
 
   nnoremap <leader>gs :Gstatus<CR>
 
-" vim-grep
-  nnoremap <leader>gg :Grep -i 
-  nnoremap <leader>GG :Grep 
-  nnoremap <leader>gG :Grep 
-  nnoremap <leader>Gg :Grep 
-  nnoremap \g :Grep <C-R><C-W><CR>
+" vim-grepper
+  let g:grepper = {}
+  let g:grepper.tools = ['git', 'grep']
+  let g:grepper.open = 1
+
+  nmap gs  <plug>(GrepperOperator)
+  xmap gs  <plug>(GrepperOperator)
+  nnoremap <leader>gg :Grepper<CR>
+  nnoremap \g :Grepper -cword -noprompt<cr>
 
 " Neomake conf
   let g:neomake_javascript_enabled_makers = ['eslint']
