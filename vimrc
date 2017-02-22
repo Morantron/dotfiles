@@ -10,7 +10,6 @@
   Plug 'croaker/mustang-vim'
   Plug 'scrooloose/nerdcommenter'
   Plug 'scrooloose/nerdtree'
-  Plug 'mtth/scratch.vim'
   Plug 'benekastah/neomake'
   Plug 'groenewege/vim-less'
   Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' | Plug 'Morantron/my-snippets'
@@ -161,12 +160,6 @@
   nnoremap <C-n> :bnext<CR>
   nnoremap <C-p> :bprev<CR>
 
-  " Quickfix/location list navigation
-  "nnoremap ]e :lnext<CR>
-  "nnoremap [e :lprev<CR>
-  "nnoremap ]q :cnext<CR>
-  "nnoremap [q :cprev<CR>
-
   " Window navigation
   nnoremap <C-h> <C-w>h
   nnoremap <C-j> <C-w>j
@@ -283,7 +276,6 @@
   let g:UltiSnipsExpandTrigger="<tab>"
   let g:UltiSnipsJumpForwardTrigger="<c-J>"
   let g:UltiSnipsJumpBackwardTrigger="<c-K>"
-  "let g:UltiSnipsSnippetDirectories=["~/.config/nvim/UltiSnips"]
 
 " Rainbow parenthesis
   nnoremap <leader>rp :RainbowParenthesesToggle<cr>
@@ -358,30 +350,5 @@ let g:jsx_ext_required = 0
   function! RelPath(toFile)
     execute ":r!python -c \"import os.path; print os.path.relpath('" . a:toFile . "', '%')\""
   endfunction
-
-" :Scriptnames func
-" " Execute 'cmd' while redirecting output.
-" Delete all lines that do not match regex 'filter' (if not empty).
-" Delete any blank lines.
-" Delete '<whitespace><number>:<whitespace>' from start of each line.
-" Display result in a scratch buffer.
-function! s:Filter_lines(cmd, filter)
-  let save_more = &more
-  set nomore
-  redir => lines
-  silent execute a:cmd
-  redir END
-  let &more = save_more
-  new
-  setlocal buftype=nofile bufhidden=hide noswapfile
-  put =lines
-  g/^\s*$/d
-  %s/^\s*\d\+:\s*//e
-  if !empty(a:filter)
-    execute 'v/' . a:filter . '/d'
-  endif
-  0
-endfunction
-command! -nargs=? Scriptnames call s:Filter_lines('scriptnames', <q-args>)
 
 " vim:foldmethod=marker:foldlevel=0
