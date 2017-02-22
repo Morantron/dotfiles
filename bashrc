@@ -8,6 +8,9 @@ case $- in
       *) return;;
 esac
 
+#set -e
+#set -x
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -22,6 +25,10 @@ HISTFILESIZE=2000
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
+
+#if [[ "$(shopt login_shell)" =~ "off" ]]; then
+  #echo "WARNING: not running in login shell mode"
+#fi
 
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
@@ -62,9 +69,8 @@ parse_git_branch() {
 }
 
 if [ "$color_prompt" = yes ]; then
-    #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-    #export PS1="\n\[$(tput bold)\]\[$(tput setaf 5)\]➜ \[$(tput setaf 6)\]\w\[$(tput setaf 3)\]\$(parse_git_branch) \[$(tput sgr0)\]"
-    export PS1="\n\[$(tput bold)\]\[$(tput setaf 5)\]➜ \[$(tput setaf 6)\]\w\[$(tput setaf 3)\] \[$(tput sgr0)\]"
+    export PS1="\n\[$(tput bold)\]\[$(tput setaf 5)\]=> \[$(tput setaf 6)\]\w\[$(tput setaf 3)\] \[$(tput sgr0)\]"
+    #export PS1="\n\[$(tput bold)\]\[$(tput setaf 5)\]➜ \[$(tput setaf 6)\]\w\[$(tput setaf 3)\] \[$(tput sgr0)\]"
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -72,32 +78,38 @@ unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
-xterm*|rxvt*)
+  xterm*|rxvt*)
     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
     ;;
-*)
+  *)
     ;;
 esac
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+  alias ls='ls --color=auto'
+  #alias dir='dir --color=auto'
+  #alias vdir='vdir --color=auto'
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+  alias grep='grep --color=auto'
+  alias fgrep='fgrep --color=auto'
+  alias egrep='egrep --color=auto'
 fi
 
 # some more ls aliases
 alias gg='git grep -E --color=auto'
 alias vim='nvim'
+alias sshr='rlwrap -a ssh'
 alias dog='pygmentize -g'
 alias cdh='cd !$:h'
 alias cdt='cd !$:t'
+alias be="bundle exec"
 alias pomodoro='pomojs --log ~/.pomo.log --tmux'
+#eval "$(thefuck --alias)"
+
+alias m=multi
+alias muxn=
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -105,12 +117,8 @@ alias pomodoro='pomojs --log ~/.pomo.log --tmux'
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
 if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+  . ~/.bash_aliases
 fi
-
-#if [ -f ~/.bash_profile ]; then
-    #. ~/.bash_profile
-#fi
 
 # vi keybindings with clear screen
 set -o vi
@@ -127,14 +135,59 @@ if [ -f /etc/profile.d/fzf.bash ]; then
 fi
 
 #autoenv for python
-if [ -f /usr/local/bin/activate.sh ]; then
-  . /usr/local/bin/activate.sh
-fi
+#if [ -f /usr/local/bin/activate.sh ]; then
+  #. /usr/local/bin/activate.sh
+#fi
 
-. /usr/share/nvm/init-nvm.sh
+#nvm shite
+#if [[ -f /usr/share/nvm/init-nvm.sh ]]; then
+  #. /usr/share/nvm/init-nvm.sh
+  #alias node=/home/jorge/.nvm/versions/node/v0.12.7/bin/node
+#fi
+
+function f() {
+  if [[ "$#" == 1 ]]; then
+    find . -iname "$1"
+  elif [[ "$#" == 2 ]]; then
+    find $1 -iname "$2"
+  else
+    echo "f: wat? wrong number of arguments"
+  fi
+}
+
+
+function mux_start() {
+  tmuxinator start "$1" --no-attach
+}
 
 function bd() {
-  cd $(cat ~/.bookmarks | fzf-tmux)
+  target_folder=$(cat ~/.bookmarks | fzf-tmux)
+
+  if [[ ! -z $target_folder ]]; then
+    cd $target_folder
+  fi
+}
+
+#m "capr % deploy" release.{staging,production}
+function multi() {
+  #TODO handle spaces
+  for ARGS in ${@:2}
+  do
+    echo "$1 $ARGS"
+  done
+
+  for ARGS in ${@:2}
+  do
+    $(echo "$1 $ARGS")
+  done
 }
 
 [[ -f $HOME/.gemrc_local ]] && export GEMRC=$HOME/.gemrc_local
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash && export FZF_DEFAULT_COMMAND='git grep -l ""'
+
+[ -f ~/hacking/redbooth/devenv/devenv.sh ] && source ~/hacking/redbooth/devenv/devenv.sh
+
+#[ -f ~/hacking/blurp/blurp.sh ] && source ~/hacking/blurp/blurp.sh
+
+#[ -f ~/hacking/tmux-inception/tmux-shim.sh ] && source ~/hacking/tmux-inception/tmux-shim.sh

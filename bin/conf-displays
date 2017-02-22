@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+extern="DP1"
+intern="eDP1"
+
+function internal_display() {
+  local mode="$1"
+
+  if [[ $mode == "off" ]]; then
+    xrandr --output $intern off --output $extern auto
+  else
+    xrandr --output $intern --mode "$mode"
+  fi
+}
+
+if [[ "$1" == "hidpi" ]]; then
+  internal_display "2560x1600"
+elif [[ "$1" == "lodpi" ]]; then
+  internal_display "1280x800"
+elif [[ "$1" == "external" ]]; then
+  internal_display "off"
+else
+  notify-send "conf-displays: $1? wtf?"
+fi

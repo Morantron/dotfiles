@@ -1,7 +1,0 @@
-#!/bin/bash
-
-if [[ -f ./node_modules/.bin/eslint ]]; then
-  ./node_modules/.bin/eslint $*
-else
-  /home/jorge/.nvm/versions/node/v0.12.7/bin/eslint $*
-fi

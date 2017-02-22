@@ -6,20 +6,20 @@
 [user]
   email = jorge@morante.eu
   name = Jorge Morante
-[color]
-	ui = auto
-  branch = auto
-  diff = auto
-  status = auto
-[color "branch"]
-  current = yellow reverse
-  local = yellow 
-  remote = green
-[color "diff"]
-  meta = blue bold
-  frag = magenta bold
-  old = red bold
-  new = green bold
+;[color]
+	;ui = auto
+  ;branch = auto
+  ;diff = auto
+  ;status = auto
+;[color "branch"]
+  ;current = yellow reverse
+  ;local = yellow 
+  ;remote = green
+;[color "diff"]
+  ;meta = blue bold
+  ;frag = magenta bold
+  ;old = red bold
+  ;new = green bold
 [color "status"]
   added = yellow
   changed = green
@@ -45,5 +45,11 @@
     fixup = "!f() { git commit --fixup=$1; git rebase -i --autosquash $1~1; }; f"
     amend = commit --amend --no-edit
     nav = "!f() { git recent | fzf | xargs git co; }; f"
+    gh-clone = "!f() { git clone git@github.com:$1; }; f"
+    diffc = diff --cached
 [github]
   user = Morantron
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	required = true

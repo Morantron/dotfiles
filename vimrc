@@ -3,6 +3,8 @@
   Plug 'Soares/butane.vim'
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
+  Plug 'junegunn/goyo.vim'
+  Plug 'junegunn/limelight.vim'
   Plug 'mattn/emmet-vim'
   Plug 'Morantron/vim-hybrid'
   Plug 'croaker/mustang-vim'
@@ -16,16 +18,19 @@
   Plug 'tpope/vim-dispatch'
   Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-vinegar'
-  Plug 'nathanaelkane/vim-indent-guides'
-  Plug 'digitaltoad/vim-jade'
-  Plug 'pangloss/vim-javascript'
-  Plug 'rodjek/vim-puppet'
-  Plug 'itspriddle/vim-jekyll'
+  Plug 'tpope/vim-fireplace'
   Plug 'tpope/vim-rails'
-  Plug 'thoughtbot/vim-rspec'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-abolish'
   Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-unimpaired'
+  Plug 'nathanaelkane/vim-indent-guides'
+  Plug 'digitaltoad/vim-jade'
+  Plug 'pangloss/vim-javascript'
+  Plug 'mxw/vim-jsx'
+  Plug 'rodjek/vim-puppet'
+  Plug 'itspriddle/vim-jekyll'
+  Plug 'thoughtbot/vim-rspec'
   Plug 'szw/vim-tags'
   Plug 'christoomey/vim-tmux-navigator'
   Plug 'milkypostman/vim-togglelist'
@@ -37,12 +42,17 @@
   Plug 'vim-scripts/IndentAnything'
   Plug 'kien/rainbow_parentheses.vim'
   Plug 'guns/vim-clojure-highlight'
+  "Plug 'guns/vim-sexp'
   Plug 'diepm/vim-rest-console'
   Plug 'jakobwesthoff/argumentrewrap'
   Plug 'teoljungberg/vim-grep'
   Plug 'lokson/ZoomWin'
   Plug 'vim-scripts/DrawIt'
   Plug 'itchyny/calendar.vim'
+  Plug 'nathanaelkane/vim-indent-guides'
+  Plug 'Morantron/vim-markdown-todo'
+  Plug 'tikhomirov/vim-glsl'
+  "Plug '~/hacking/bufo.vim'
 
  "only installing this for cacaview nerdy stuff
   Plug 'vim-scripts/AnsiEsc.vim'
@@ -58,7 +68,6 @@
   set shiftwidth=2
   set number
   set laststatus=2
-  set encoding=utf-8
   set mouse=a
   syntax on
   filetype plugin indent on
@@ -91,6 +100,7 @@
   set modelines=1 " check last line for additional vim settings ( fold stuff in vimrc )
 
   if !has("nvim")
+    set encoding=utf-8
     set term=screen-256color
   endif
 
@@ -103,6 +113,7 @@
   "colors hybrid
   "colors C64
   colors PaperColor
+  "colors elflord
 " }}}
 
 " General mappings {{{
@@ -151,10 +162,10 @@
   nnoremap <C-p> :bprev<CR>
 
   " Quickfix/location list navigation
-  nnoremap ]e :lnext<cr>
-  nnoremap [e :lprev<cr>
-  nnoremap ]q :cnext<cr>
-  nnoremap [q :cprev<cr>
+  "nnoremap ]e :lnext<CR>
+  "nnoremap [e :lprev<CR>
+  "nnoremap ]q :cnext<CR>
+  "nnoremap [q :cprev<CR>
 
   " Window navigation
   nnoremap <C-h> <C-w>h
@@ -194,7 +205,29 @@
 
 
 " FZF conf
+  "let g:fzf_action = {
+  "\ 'ctrl-d': 'bdelete',
+  "\ }
+
+  "function! s:buflisted()
+    "return filter(range(1, bufnr('$')), 'buflisted(v:val)')
+  "endfunction
+
+  "function! s:bufopen()
+    "return filter(range(1, bufnr('$')), 'buflisted(v:val)')
+  "endfunction
+
+  "function! CustomFZFBuffers(...)
+    "let bufs = map(sort(s:buflisted(), 's:sort_buffers'), 's:format_buffer(v:val)')
+    "return s:fzf('buffers', {
+    "\ 'source':  reverse(bufs),
+    "\ 'sink*':   s:function('s:bufopen'),
+    "\ 'options': '+m -x --tiebreak=index --header-lines=1 --ansi -d "\t" -n 2,1..2 --prompt="Buf> "',
+    "\}, a:000)
+  "endfunction
+
   nnoremap <space><space> :FZF<CR>
+  nnoremap <space>b :Buffers<CR>
 
 " Tmux stuff
   let g:VimuxUseNearest = 1
@@ -222,9 +255,13 @@
   vmap \\ :<C-U>call SendToNearestPane(visualmode(), 1)<CR>
 
 " Fugitive conf & mappings
-  nnoremap <leader>gd :Gdiff<CR>
+  nnoremap <leader>gd :Gvdiff<CR>
   nnoremap <leader>12 :diffget<CR>
   nnoremap <leader>21 :diffput<CR>
+  "for 3-way merge conflicts
+  nnoremap <leader>34 :diffget //2<CR>
+  nnoremap <leader>43 :diffget //3<CR>
+
   nnoremap <leader>gs :Gstatus<CR>
 
 " vim-grep
@@ -248,55 +285,6 @@
   let g:UltiSnipsJumpBackwardTrigger="<c-K>"
   "let g:UltiSnipsSnippetDirectories=["~/.config/nvim/UltiSnips"]
 
-" Redbooth stuff ( TODO move to plugin )
-  nnoremap \d :call PseudoGotoDef()<cr>
-
-  function! PseudoGotoDef()
-    let line=getline('.')
-
-    if match(line, 'Teambox') > 0
-      call GotoModule()
-    elseif match(line, 'template: ') > 0
-      call GotoTemplate()
-    else
-      echo 'wat'
-    endif
-  endfunction
-
-  function! GotoModule()
-    let ctrl_p_shortcut = ' '
-    let line=getline('.')
-    "capture module name
-    let module=substitute(line, '\(.*\)\(Teambox[A-Za-z._]\+\)\(.*\)', '\=submatch(2)', 'g')
-    "decamelize
-    let module=substitute(module, '\C\([a-z]\)\([A-Z]\)', '\=submatch(1)."-".submatch(2)', 'gI')
-    let module=tolower(module)
-    let module=substitute(module, 'teambox.', '', 'g')
-    let module=substitute(module, '\.', '/', 'g')
-    let file='app/javascripts/' . module . '.js'
-    let fuzzy=substitute(file, '[/.-]', '', 'g')
-    if filereadable(file)
-      execute 'find '. file
-    else
-      call feedkeys(ctrl_p_shortcut . fuzzy)
-    endif
-  endfunction
-
-  function! GotoTemplate()
-    let ctrl_p_shortcut = ' '
-    let line=getline('.')
-    "capture template name
-    let template=substitute(line, '\(.*\)template: ''\([^'']*\)''', '\=submatch(2)', 'g')
-    let template=substitute(template, '\.', '/', 'g')
-    let file = 'app/templates/' . template . '.jade'
-    let fuzzy=substitute(file, '[/.-]', '', 'g')
-    if filereadable(file)
-      execute 'find '. file
-    else
-      call feedkeys(ctrl_p_shortcut . fuzzy)
-    endif
-  endfunction
-
 " Rainbow parenthesis
   nnoremap <leader>rp :RainbowParenthesesToggle<cr>
   let g:rainbow_active = 1
@@ -316,6 +304,32 @@
   \ 'rest': { 'left': '#' },
   \ }
 
+" Goyo ( zen mode )
+  nnoremap <leader>z :Goyo<cr>
+  function! s:goyo_enter()
+    silent !tmux set status off
+    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
+    set noshowmode
+    set noshowcmd
+    "set scrolloff=999
+    "Limelight
+  endfunction
+
+  function! s:goyo_leave()
+    silent !tmux set status on
+    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
+    set showmode
+    set showcmd
+    "set scrolloff=5
+    "Limelight!
+  endfunction
+
+  autocmd! User GoyoEnter nested call <SID>goyo_enter()
+  autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+" Vim jsx
+let g:jsx_ext_required = 0
+
 " Rspec conf
   let g:rspec_command = "Dispatch bundle exec rspec {spec}"
   map ,rsf :call RunCurrentSpecFile()<CR>
@@ -325,6 +339,8 @@
 
 " Markdown
   let g:instant_markdown_slow = 1
+  let g:vim_markdown_new_list_item_indent = 2
+  let g:vim_markdown_no_default_key_mappings = 1
   autocmd BufWritePost *.md silent exec "!cat % | curl -s -XPUT -T - http://localhost:8090"
 
 " Argument rewrap
@@ -342,4 +358,30 @@
   function! RelPath(toFile)
     execute ":r!python -c \"import os.path; print os.path.relpath('" . a:toFile . "', '%')\""
   endfunction
+
+" :Scriptnames func
+" " Execute 'cmd' while redirecting output.
+" Delete all lines that do not match regex 'filter' (if not empty).
+" Delete any blank lines.
+" Delete '<whitespace><number>:<whitespace>' from start of each line.
+" Display result in a scratch buffer.
+function! s:Filter_lines(cmd, filter)
+  let save_more = &more
+  set nomore
+  redir => lines
+  silent execute a:cmd
+  redir END
+  let &more = save_more
+  new
+  setlocal buftype=nofile bufhidden=hide noswapfile
+  put =lines
+  g/^\s*$/d
+  %s/^\s*\d\+:\s*//e
+  if !empty(a:filter)
+    execute 'v/' . a:filter . '/d'
+  endif
+  0
+endfunction
+command! -nargs=? Scriptnames call s:Filter_lines('scriptnames', <q-args>)
+
 " vim:foldmethod=marker:foldlevel=0
