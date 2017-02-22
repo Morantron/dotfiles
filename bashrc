@@ -48,6 +48,12 @@ fi
 
 [ -f ~/hacking/redbooth/devenv/devenv.sh ] && source ~/hacking/redbooth/devenv/devenv.sh
 
+
+if [ -z "$TMUX"  ]; then
+  tmuxinator start notes --no-attach
+  tmux new-session -A -s hello
+fi
+
 #[ -f ~/hacking/blurp/blurp.sh ] && source ~/hacking/blurp/blurp.sh
 
 #[ -f ~/hacking/tmux-inception/tmux-shim.sh ] && source ~/hacking/tmux-inception/tmux-shim.sh
