@@ -3,6 +3,7 @@
 name: redbooth
 root: ~/hacking/redbooth
 
+pre: sudo lxc-start -n redbooth-dev
 windows:
   - bash:
     -
@@ -13,4 +14,4 @@ windows:
     - cd teambox-hosted
     - vim
   - servers:
-    -
+    - ssh devenv
