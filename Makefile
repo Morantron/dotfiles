@@ -14,7 +14,6 @@ default:
 	ln -fs $(PWD)/profile $(HOME)/.profile
 	ln -fs $(PWD)/tmux.conf $(HOME)/.tmux.conf
 	ln -fs $(PWD)/tmuxinator $(HOME)/.tmuxinator
-	ln -fs $(PWD)/vim $(HOME)/.vim
 	ln -fs $(PWD)/vimrc $(HOME)/.vimrc
 	ln -fs $(PWD)/Xdefaults $(HOME)/.Xdefaults
 	ln -fs $(PWD)/xinitrc $(HOME)/.xinitrc
