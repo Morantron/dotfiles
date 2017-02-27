@@ -272,7 +272,7 @@
   let g:neomake_javascript_enabled_makers = ['eslint']
   let g:neomake_ruby_enabled_makers = ['rubocop']
 
-  let g:neomake_logfile = "/home/jorge/.neomake.log"
+  let g:neomake_logfile = expand("$HOME/.neomake.log")
   autocmd BufWritePost * Neomake
 
 
