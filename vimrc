@@ -261,6 +261,9 @@
 " vim-grepper
   let g:grepper = {}
   let g:grepper.tools = ['git', 'grep']
+  let g:grepper.git = {
+  \  'grepprg': 'git grep -ni'
+  \ }
   let g:grepper.open = 1
 
   nmap gs  <plug>(GrepperOperator)
