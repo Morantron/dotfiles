@@ -193,7 +193,7 @@
   nnoremap <leader>cd :cd %:p:h<cr>
 
 " NERDTree conf & mappings
-  nnoremap <C-@> :NERDTreeToggle<CR>
+  nnoremap <C-Space> :NERDTreeToggle<CR>
   nnoremap <leader>f :NERDTreeFind<CR>
   let g:NERDTreeHijackNetrw=1
 
