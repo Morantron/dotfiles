@@ -28,6 +28,7 @@
   untracked = cyan
 [merge]
   tool = manual
+  renamelimit = 4096
 [mergetool "manual"]
   cmd = vim $MERGED
   keepTemporaries = false
@@ -55,3 +56,4 @@
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	required = true
+	process = git-lfs filter-process
