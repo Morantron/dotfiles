@@ -15,8 +15,8 @@ function mux_start() {
 function bd() {
   target_folder=$(cat ~/.bookmarks | fzf-tmux)
 
-  if [[ ! -z $target_folder ]]; then
-    cd $target_folder
+  if [[ ! -z "$target_folder" ]]; then
+    eval cd $target_folder
   fi
 }
 
@@ -33,5 +33,3 @@ function multi() {
     $(echo "$1 $ARGS")
   done
 }
-
-
