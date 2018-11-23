@@ -2,15 +2,11 @@ name: notes
 root: ~/.notes
 startup_window: 1
 
-pre: rm -rf ~/.notes/TODO.md.swp ~/tmp/TODO.md.sw*
+on_project_first_start: rm -rf ~/.notes/TODO.md.swp ~/tmp/TODO.md.sw*
 windows:
   - notes:
     - vim ~/.notes/TODO.md
   - watch:
     - ./scripts/watch
-  - pomo:
-      panes:
-        - pomolog:
-          - tail -f ~/.pomo.log
-        - pomo:
-          - echo "pomodoro \"Do something\""
+  - ohmd:
+    - ohmd
