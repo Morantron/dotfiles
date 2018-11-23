@@ -1,119 +1,103 @@
 " Plugins {{{
   call plug#begin('~/.vim/plugged')
-  Plug 'Soares/butane.vim'
+
+  " Defaults
+  Plug 'tpope/vim-sensible'
+
+  " snippets and completion
+  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' | Plug 'Morantron/my-snippets'
+  Plug 'mattn/emmet-vim'
+
+  " file and buffer navigation
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
-  Plug 'junegunn/goyo.vim'
-  Plug 'junegunn/limelight.vim'
-  Plug 'mattn/emmet-vim'
-  Plug 'Morantron/vim-hybrid'
-  Plug 'croaker/mustang-vim'
-  Plug 'scrooloose/nerdcommenter'
   Plug 'scrooloose/nerdtree'
-  Plug 'benekastah/neomake'
-  Plug 'groenewege/vim-less'
-  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' | Plug 'Morantron/my-snippets'
-  Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
-  Plug 'tpope/vim-dispatch'
-  Plug 'tpope/vim-fugitive'
   Plug 'tpope/vim-vinegar'
-  Plug 'tpope/vim-fireplace'
+  Plug 'jeetsukumaran/vim-buffergator'
+
+  " language/frameworks plugins
+  Plug 'sheerun/vim-polyglot' " syntax highlight all the things
   Plug 'tpope/vim-rails'
+
+  " edition
+  Plug 'scrooloose/nerdcommenter'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-abolish'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-unimpaired'
-  Plug 'nathanaelkane/vim-indent-guides'
-  Plug 'digitaltoad/vim-jade'
-  Plug 'pangloss/vim-javascript'
-  Plug 'mxw/vim-jsx'
-  Plug 'rodjek/vim-puppet'
-  Plug 'itspriddle/vim-jekyll'
-  Plug 'thoughtbot/vim-rspec'
-  Plug 'szw/vim-tags'
-  Plug 'christoomey/vim-tmux-navigator'
-  Plug 'milkypostman/vim-togglelist'
-  Plug 'romainl/vim-qf'
-  Plug 'bronson/vim-trailing-whitespace'
-  Plug 'vim-scripts/C64.vim'
-  Plug 'benmills/vimux'
-  Plug 'kchmck/vim-coffee-script'
-  Plug 'NLKNguyen/papercolor-theme'
-  Plug 'vim-scripts/IndentAnything'
-  Plug 'kien/rainbow_parentheses.vim'
-  Plug 'guns/vim-clojure-highlight'
-  "Plug 'guns/vim-sexp'
-  Plug 'diepm/vim-rest-console'
-  Plug 'jakobwesthoff/argumentrewrap'
-  Plug 'mhinz/vim-grepper'
-  Plug 'lokson/ZoomWin'
-  Plug 'vim-scripts/DrawIt'
-  Plug 'itchyny/calendar.vim'
-  Plug 'nathanaelkane/vim-indent-guides'
-  Plug 'Morantron/vim-markdown-todo'
-  Plug 'tikhomirov/vim-glsl'
-  "Plug '~/hacking/bufo.vim'
 
- "only installing this for cacaview nerdy stuff
-  Plug 'vim-scripts/AnsiEsc.vim'
+  " crazy edition
+  Plug 'vim-scripts/DrawIt'
+  "Plug 'dhruvasagar/vim-table-mode'
+
+  " git
+  Plug 'tpope/vim-fugitive' | Plug 'tpope/vim-rhubarb'
+  Plug 'vim-scripts/ConflictMotions' |
+      \ Plug 'vim-scripts/CountJump' |
+      \ Plug 'vim-scripts/ingo-library' |
+      \ Plug 'tpope/vim-repeat' |
+      \ Plug 'vim-scripts/visualrepeat'
+  Plug 'airblade/vim-gitgutter'
+
+  " swag
+  Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
+  Plug 'NLKNguyen/papercolor-theme'
+  Plug 'dracula/vim'
+  Plug 'kien/rainbow_parentheses.vim'
+  Plug 'bronson/vim-trailing-whitespace'
+  Plug 'nathanaelkane/vim-indent-guides'
+  Plug 'junegunn/vim-emoji'
+
+  " slightly sensibler defaults
+  "   2 spaces tabs
+  set tabstop=2
+  set shiftwidth=2
+  set expandtab
+
+  "   show line numbers
+  set number
+
+  "   entering insert mode at proper indent level
+  filetype plugin indent on
+
+  " search
+  Plug 'romainl/vim-qf'
+  Plug 'mhinz/vim-grepper'
+
+  " linting and friends
+  Plug 'w0rp/ale'
+  Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
+  " zen mode
+  Plug 'junegunn/goyo.vim' | Plug 'junegunn/limelight.vim'
+
+  " tmux
+  Plug 'christoomey/vim-tmux-navigator'
+  Plug 'jpalardy/vim-slime'
+
+  " testing
+  Plug 'janko-m/vim-test'
+  Plug 'tpope/vim-dispatch'
+  "Plug 'neomake/neomake'
+
+  " misc
+  Plug 'embear/vim-localvimrc'
+  "Plug 'ludovicchabant/vim-gutentags'
 
   call plug#end()
 " }}}
 
-" General settings {{{
-  set nocompatible              " be iMproved, required
-  set ai
-  set expandtab
-  set tabstop=2
-  set shiftwidth=2
-  set number
-  set laststatus=2
-  set mouse=a
-  syntax on
-  filetype plugin indent on
-  "set cindent
-  "set smartindent
-  "set autoindent
-  set expandtab
-  set undofile
-  set undodir=~/.vim/undo
-  set undoreload=1000
-  set backupdir=~/.vimtmp,~/.tmp,~/tmp,/var/tmp,/tmp
-  set directory=~/.vimtmp,~/.tmp,~/tmp,/var/tmp,/tmp
-  set t_Co=256
-  set hidden
-  set history=1000
-  runtime macros/matchit.vim
-  set wildmenu
-  set wildmode=list:longest
-  set wildignore+=.git
-  set ignorecase
-  set smartcase
-  set scrolloff=3
-  set ruler
-  set shortmess=atI
-  set hlsearch
-  set incsearch
-  set autoread
-  set ttyfast
-  set shell=/bin/bash
-  set modelines=1 " check last line for additional vim settings ( fold stuff in vimrc )
-
-  if !has("nvim")
-    set encoding=utf-8
-    set term=screen-256color
-  endif
-
-  set backupcopy=yes
-  set omnifunc=syntaxcomplete#Complete
+  "enables autochdir when entering insert mode ( relative path completion )
+  autocmd InsertEnter * let save_cwd = getcwd() | set autochdir
+  autocmd InsertLeave * set noautochdir | execute 'cd' fnameescape(save_cwd)
 " }}}
 
 " Colors {{{
   set background=dark
-  "colors hybrid
-  "colors C64
   colors PaperColor
-  "colors elflord
 " }}}
 
 " General mappings {{{
@@ -133,33 +117,10 @@
   " toggle search highlight
   nnoremap <leader>hl :set hlsearch!<CR>
 
-  " toggle quickfix
-  nnoremap <leader>qf :call ToggleQuickfixList()<CR>
-
   " change conf
   nnoremap <leader>rc :e ~/hacking/dotfiles/vimrc<CR>
 
-  " split by comma
-  vnoremap SS :s/,/,\r/g<CR>gv=
-
 " }}}
-
-" poor man's orgmode {{{
-  function! AddTodo()
-    let todo_path = expand("%") . ":" . line(".")
-    e ~/.notes/TODO.md
-    call append(line('$'), "[ ] " . todo_path)
-    normal G$
-  endfunction
-
-  nnoremap <leader>te :e ~/.notes/TODO.md<cr>
-  nnoremap <leader>ta :call AddTodo()<cr>
-  nnoremap <leader>tm :normal 0lrx<cr>
-" }}}
-
-  " Buffer change
-  nnoremap <C-n> :bnext<CR>
-  nnoremap <C-p> :bprev<CR>
 
   " Window navigation
   nnoremap <C-h> <C-w>h
@@ -167,94 +128,29 @@
   nnoremap <C-k> <C-w>k
   nnoremap <C-l> <C-w>l
 
-  if has('nvim')
-    " XXX: workaround for libtermkeys problem in tmux
-    if exists('$TMUX')
-      nmap <BS> <C-h>
-    end
-
-    " Terminal navigation
-    tnoremap <Esc> <C-\><C-n>
-
-    tnoremap <C-f><C-l> <C-l>
-
-    " enable clipboard
-    set clipboard+=unnamedplus
-  endif
-
   " Airline
-  let g:airline#extensions#tabline#enabled = 1
+  "let g:airline#extensions#tabline#enabled = 1
   let g:airline_powerline_fonts = 1
-
-  " ctags
-  nnoremap <leader>ct :!ctags -R *<CR>
+  let g:airline_theme = 'minimalist'
 
   " cd to current buffer directory
   nnoremap <leader>cd :cd %:p:h<cr>
 
 " NERDTree conf & mappings
-  nnoremap <C-Space> :NERDTreeToggle<CR>
   nnoremap <leader>f :NERDTreeFind<CR>
   let g:NERDTreeHijackNetrw=1
 
-
-" FZF conf
-  "let g:fzf_action = {
-  "\ 'ctrl-d': 'bdelete',
-  "\ }
-
-  "function! s:buflisted()
-    "return filter(range(1, bufnr('$')), 'buflisted(v:val)')
-  "endfunction
-
-  "function! s:bufopen()
-    "return filter(range(1, bufnr('$')), 'buflisted(v:val)')
-  "endfunction
-
-  "function! CustomFZFBuffers(...)
-    "let bufs = map(sort(s:buflisted(), 's:sort_buffers'), 's:format_buffer(v:val)')
-    "return s:fzf('buffers', {
-    "\ 'source':  reverse(bufs),
-    "\ 'sink*':   s:function('s:bufopen'),
-    "\ 'options': '+m -x --tiebreak=index --header-lines=1 --ansi -d "\t" -n 2,1..2 --prompt="Buf> "',
-    "\}, a:000)
-  "endfunction
-
   nnoremap <space><space> :FZF<CR>
-  nnoremap <space>b :Buffers<CR>
 
-" Tmux stuff
-  let g:VimuxUseNearest = 1
-
-  function! SendToNearestPane(type, ...)
-    let reg_save = @@
-
-    "if exists("g:VimuxRunnerIndex") "use this to open vimux runner
-    "inteligently
-
-    if a:0  " Invoked from Visual mode, use gv command.
-      silent exe "normal! gvy"
-    elseif a:type == 'line'
-      silent exe "normal! '[V']y"
-    else
-      silent exe "normal! :%y"
-    endif
-
-    call VimuxSendText(@@)
-
-    let @@ = reg_save
-  endfunction
-
-  nnoremap \\ :<C-U>call SendToNearestPane(1)<CR>
-  vmap \\ :<C-U>call SendToNearestPane(visualmode(), 1)<CR>
+" Buffer management
+  let g:buffergator_viewport_split_policy = "B"
+  nnoremap <leader>b :Buffers<CR>
+  nnoremap <leader>B :BuffergatorOpen<CR>
 
 " Fugitive conf & mappings
   nnoremap <leader>gd :Gvdiff<CR>
   nnoremap <leader>12 :diffget<CR>
   nnoremap <leader>21 :diffput<CR>
-  "for 3-way merge conflicts
-  nnoremap <leader>34 :diffget //2<CR>
-  nnoremap <leader>43 :diffget //3<CR>
 
   nnoremap <leader>gs :Gstatus<CR>
 
@@ -271,13 +167,11 @@
   nnoremap <leader>gg :Grepper<CR>
   nnoremap \g :Grepper -cword -noprompt<cr>
 
-" Neomake conf
-  let g:neomake_javascript_enabled_makers = ['eslint']
-  let g:neomake_ruby_enabled_makers = ['rubocop']
-
-  let g:neomake_logfile = expand("$HOME/.neomake.log")
-  autocmd BufWritePost * Neomake
-
+" vim-qf
+  nnoremap <leader>qf :call ToggleQuickfixList()<CR>
+  " Causes issues with resizing (https://github.com/vim/vim/issues/931).
+  let g:qf_loclist_window_bottom = 0
+  let g:qf_window_bottom = 0
 
 " UltiSnips conf
   let g:UltiSnipsExpandTrigger="<tab>"
@@ -291,13 +185,6 @@
   au Syntax * RainbowParenthesesLoadRound
   au Syntax * RainbowParenthesesLoadSquare
   au Syntax * RainbowParenthesesLoadBraces
-
-" Rest console
-  let g:vrc_trigger = '<C-s>'
-  let s:vrc_auto_format_response_patterns = {
-  \   '*': 'jq "."',
-  \}
-  autocmd BufWritePost *.rest call VrcQuery()
 
   let g:NERDCustomDelimiters = {
   \ 'rest': { 'left': '#' },
@@ -326,13 +213,18 @@
   autocmd! User GoyoEnter nested call <SID>goyo_enter()
   autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
-" Vim jsx
-let g:jsx_ext_required = 0
+" localvimrc
+let g:localvimrc_ask = 0
+let g:localvimrc_sandbox = 0
+let g:localvimrc_whitelist = [
+      \ '/home/morantron/hacking/camaloon/paper/.lvimrc',
+      \ '/home/morantron/hacking/camaloon/shared/template-edit/.lvimrc',
+      \ '/home/morantron/hacking/tmux-fingers-web/.lvimrc',
+      \]
 
-" Rspec conf
-  let g:rspec_command = "Dispatch bundle exec rspec {spec}"
-  map ,rsf :call RunCurrentSpecFile()<CR>
-  map ,rss :call RunNearestSpec()<CR>
+" ale
+let g:ale_emit_conflict_warnings = 0
+
 " Ruby stuff
   au BufRead,BufNewFile *.rabl setf ruby
 
@@ -342,20 +234,54 @@ let g:jsx_ext_required = 0
   let g:vim_markdown_no_default_key_mappings = 1
   autocmd BufWritePost *.md silent exec "!cat % | curl -s -XPUT -T - http://localhost:8090"
 
-" Argument rewrap
-  nnoremap <silent> <leader>s :call argumentrewrap#RewrapArguments()<CR>
+" Emmet conf
+let g:user_emmet_install_global = 0
+let g:user_emmet_settings = {
+\  'html': {
+\       'extends' : 'html',
+\   },
+\  'javascript.jsx' : {
+\      'extends' : 'jsx',
+\  },
+\  'typescript' : {
+\      'extends' : 'jsx',
+\  },
+\}
 
-" Macros stuff
-  " split by commas
-  let @s= ":s/, /\\r&/g"
-  " die hash rockets
-  let @h= ":s/:\\(\\w\\+\\) =>/\\1:/g"
-  " go to file under cursor in existing vertical split
-  let @f= "ovgF"
+" Slime conf
+let g:slime_target = "tmux"
+let g:slime_dont_ask_default = 1
+let g:slime_default_config = {"socket_name": split($TMUX, ",")[0], "target_pane": ":.2"}
 
-" Custom functions
-  function! RelPath(toFile)
-    execute ":r!python -c \"import os.path; print os.path.relpath('" . a:toFile . "', '%')\""
-  endfunction
+autocmd FileType html,css,javascript.jsx EmmetInstall
 
-" vim:foldmethod=marker:foldlevel=0
+" Lang server
+
+let g:LanguageClient_serverCommands = {
+    \ 'javascript': ['javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['javascript-typescript-stdio'],
+    \ 'ruby': ['tcp://localhost:7658'],
+    \ }
+
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+" Vim Test
+function! GrasshopperTransform(cmd) abort
+  return 'hop ' . a:cmd
+endfunction
+
+let g:test#custom_transformations = {'grasshopper': function('GrasshopperTransform')}
+let g:test#transformation = 'grasshopper'
+
+let test#strategy = 'dispatch'
+
+let g:dispatch_compilers = { 'hop': ''}
+
+nnoremap <leader>tt :TestNearest<CR>
+
+" vim-emoji conf
+"set completefunc=emoji#complete
+"nnoremap <leader>em :s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g<CR>
+
