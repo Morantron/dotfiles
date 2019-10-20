@@ -13,7 +13,7 @@ function mux_start() {
 }
 
 function bd() {
-  target_folder=$(cat ~/.bookmarks | fzf-tmux)
+  target_folder=$(cat ~/.bookmarks | fzf)
 
   if [[ ! -z "$target_folder" ]]; then
     eval cd $target_folder
