@@ -18,6 +18,7 @@
   " language/frameworks plugins
   Plug 'sheerun/vim-polyglot' " syntax highlight all the things
   Plug 'tpope/vim-rails'
+  Plug 'lmeijvogel/vim-yaml-helper'
 
   " edition
   Plug 'scrooloose/nerdcommenter'
@@ -25,6 +26,10 @@
   Plug 'tpope/vim-abolish'
   Plug 'tpope/vim-surround'
   Plug 'tpope/vim-unimpaired'
+  Plug 'AndrewRadev/sideways.vim'
+  Plug 'AndrewRadev/switch.vim'
+  Plug 'AndrewRadev/splitjoin.vim'
+  Plug 'AndrewRadev/tagalong.vim'
 
   " crazy edition
   Plug 'vim-scripts/DrawIt'
@@ -47,6 +52,10 @@
   Plug 'bronson/vim-trailing-whitespace'
   Plug 'nathanaelkane/vim-indent-guides'
   Plug 'junegunn/vim-emoji'
+  Plug 'ap/vim-css-color'
+
+  " inbox ( trying plugins here, categorize them or remove them )
+  "Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 
   " slightly sensibler defaults
   "   2 spaces tabs
@@ -60,16 +69,15 @@
   "   entering insert mode at proper indent level
   filetype plugin indent on
 
+  "   allow to change buffers with unsaved changes
+  set hidden
+
   " search
   Plug 'romainl/vim-qf'
   Plug 'mhinz/vim-grepper'
 
   " linting and friends
   Plug 'w0rp/ale'
-  Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
 
   " zen mode
   Plug 'junegunn/goyo.vim' | Plug 'junegunn/limelight.vim'
@@ -85,7 +93,8 @@
 
   " misc
   Plug 'embear/vim-localvimrc'
-  "Plug 'ludovicchabant/vim-gutentags'
+
+  " trying out area, remove/categorize from time to time
 
   call plug#end()
 " }}}
@@ -218,12 +227,21 @@ let g:localvimrc_ask = 0
 let g:localvimrc_sandbox = 0
 let g:localvimrc_whitelist = [
       \ '/home/morantron/hacking/camaloon/paper/.lvimrc',
+      \ '/home/morantron/hacking/redbooth/redbooth-backend/.lvimrc',
       \ '/home/morantron/hacking/camaloon/shared/template-edit/.lvimrc',
       \ '/home/morantron/hacking/tmux-fingers-web/.lvimrc',
       \]
 
 " ale
 let g:ale_emit_conflict_warnings = 0
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint', 'prettier'],
+\}
+
+nmap <leader>f  <plug>(ale_fix)
+xmap <leader>f  <plug>(ale_fix)
+vmap <leader>f  <plug>(ale_fix)
 
 " Ruby stuff
   au BufRead,BufNewFile *.rabl setf ruby
@@ -235,8 +253,11 @@ let g:ale_emit_conflict_warnings = 0
   autocmd BufWritePost *.md silent exec "!cat % | curl -s -XPUT -T - http://localhost:8090"
 
 " Emmet conf
-let g:user_emmet_install_global = 0
+let g:user_emmet_install_global = 1
 let g:user_emmet_settings = {
+\  'eruby': {
+\       'extends': 'ruby',
+\  },
 \  'html': {
 \       'extends' : 'html',
 \   },
@@ -254,6 +275,14 @@ let g:slime_dont_ask_default = 1
 let g:slime_default_config = {"socket_name": split($TMUX, ",")[0], "target_pane": ":.2"}
 
 autocmd FileType html,css,javascript.jsx EmmetInstall
+
+" yaml helper mappings
+nnoremap <leader>yg :YamlGoToKey 
+nnoremap <leader>yy :YamlGetFullPath<CR>
+nnoremap <leader>yP :YamlGoToParent<CR>
+autocmd FileType javascript.jsx nnoremap <leader>yp i{I18n.t('pa')}
+autocmd FileType eruby nnoremap <leader>yp i<%= t('pa') %>
+autocmd FileType haml nnoremap <leader>yp it('pa')
 
 " Lang server
 
@@ -282,6 +311,7 @@ let g:dispatch_compilers = { 'hop': ''}
 nnoremap <leader>tt :TestNearest<CR>
 
 " vim-emoji conf
-"set completefunc=emoji#complete
-"nnoremap <leader>em :s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g<CR>
+"   NOTE: for autocomplete do <C-X><C-U>
+set completefunc=emoji#complete
+nnoremap <leader>em :s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g<CR>
 
