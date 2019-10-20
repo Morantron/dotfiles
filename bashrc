@@ -23,7 +23,7 @@ bind -m vi-insert "\C-n":next-history
 bind -m vi-insert "\C-p":previous-history
 
 # le fancy PS1
-export PS1="\[$(tput bold)\]\[$(tput setaf 5)\]=> \[$(tput setaf 4)\]\w\[$(tput setaf 3)\] \[$(tput sgr0)\]"
+export PS1="🍕 \[$(tput bold)\]\[$(tput setaf 5)\]=> \[$(tput setaf 4)\]\w\[$(tput setaf 3)\] \[$(tput sgr0)\]"
 
 if [ -f ~/.bash_functions ]; then
   . ~/.bash_functions
