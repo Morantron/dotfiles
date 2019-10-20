@@ -8,5 +8,5 @@ windows:
     - vim ~/.notes/TODO.md
   - watch:
     - ./scripts/watch
-  - ohmd:
-    - ohmd
+  #- ohmd:
+    #- ohmd
