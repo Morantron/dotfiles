@@ -50,6 +50,7 @@
     nav = "!f() { git recent | fzf | xargs git co; }; f"
     gh-clone = "!f() { git clone git@github.com:$1; }; f"
     diffc = diff --cached
+    current-branch = symbolic-ref --short HEAD
 [github]
   user = Morantron
 [filter "lfs"]
