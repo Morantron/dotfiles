@@ -1,4 +1,0 @@
-Xterm*termName: xterm-256color
-Xterm*locale: true
-Xterm*saveLines: 100000
-Xterm*scrollbar: false

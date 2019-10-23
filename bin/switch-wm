@@ -1,7 +1,0 @@
-#!/bin/sh
-
-if [ -z `pgrep awesome` ]; then
-  killall gnome-shell && sleep 0.1 && awesome &
-else
-  killall awesome && killall compton && sleep 0.1 && gnome-shell &
-fi
