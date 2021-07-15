@@ -1,144 +1,4 @@
 " Plugins {{{
-  call plug#begin('~/.vim/plugged')
-
-  "let g:ale_disable_lsp = 1
-
-  " Hail to the pope
-  "
-  " ,,,,,,,,,,,,,,,,,,,,,,,,,*,,**/(%@@@@@@@@@@@%*******************/**/////////////
-  " ,,,,,,,,,,,,,,,,,,,,,,,,**/%&@@@@@@@@@@@@@@@@@@@@%****************//////////////
-  " ,,,,,,,,,,,,,,,,,,,,,,,**/&%@&&@@&&@@@@@@@@@@@@@@@@@#***************////////////
-  " ,,,,,,,,,,,,,,,,,,,,,,*/%&###(//(((#%%&%%&%%&&&&@@@@@@@****************/////////
-  " ,,,,,,..,.,,.....,,,,(&%/*//*///////(((((#(####%#&&@@@@@@****************///////
-  " ...................,@%**,,,,,,*****////((((((((((#&@@@@@@@#***************//////
-  " .................,.&*,,,,,,,,,,,******////((((((((%&@@@@@@@%****************////
-  " ................*%&*,,,,,,,,,,,,,,*******//////(((#&@@@@@@@@%****************///
-  " ...............*/#*,,,,,,,..,,,,,,*********/*////(%%&@@@@@@@@#*****************/
-  " ..............,,#(,,,,,,,,,,,,,,***************//(%&%@@@@@@@@@%*****************
-  " ...............,/(*,.....,,,,,,,,,,******//***///(%%@@@@@@@@@@@(****************
-  " ................./****/*,.....,,,,,,*******///(/((&&&@@@@@@@@@@@(***************
-  " .................***//(#**,,,**/((((//*((#((//(/((%&&@@@@@@@@@@@%(**************
-  " .................*/*.*%(/*,,,*//(/(, .@&##%#(/////#&@@%##&@@@@@@&(,*************
-  " ................,******,,,,**///////////(((//*////%@@%%#/&@&@@@@@/*,************
-  " ................**,,*,,,***//((///*************//#&@@/&@@@&@@@@@@#**,***********
-  " ...............,,....,,,...,*/((((************//(@@@%%&@@@@@@@@@@#*,,,**********
-  " ...............*,,,**,,**/(#&&#(%(/*,,******///(&@@@(((%@@@@@@@@@(,*,,,,,*******
-  " .............../*,,/*,**,*,,//((/*******//(//((#@@@@%#%&@@@@@@@@&**,,,,,********
-  " ...............,**,/**//(((((#(//(##/***/((//(#&@@@@@@@@@@@@@@@@(*,,,,,,,*******
-  " ...............,/****,,******/////***,,/((/(((%@@@@@@@@@@@@@@@@@/*,,,,,,,*******
-  " ...............(///***,********//(((///(((((%&@@&&@@@@@@@@@@@@@&*,,,,,,,,,,*****
-  " ...............(*&#/**,,*,,**/((((((((####%&@@&/(@@@@@@@@@@@@@@#,,,,,,,,,,,*****
-  " ..............(*@%@&%////(*//((##%%&&&&&&&&#(///&@@@@@@@@@&@@@%/*,,,,,,,,,,*****
-  " .............,&#&@@##&@&%%&@@@@@@@@&&&&%(((/*//#@@@@@@@@@@@@@&*/*,,,,,,,,,,*****
-  " ...........,(,#&&@(@@@@&,***/#%&%%#((((////**/(&@@@@@@@@@@@@&(,*,,,,,,,,,,,*****
-  " ..........**,#&@%/@@@@@&,,,,,,*****,,,,,,*,,*/%&@@@@@@@@@@@@@&*,,,,,,,,,,,*,****
-  " ........,,**&&%(,(@@@@@/,,,....,..,,,,,,.,,**(@@@@@@@@@@@@@@@@@@@@%/**,,,*******
-  " .....,.,*,/&*/,%/&@@@%@&,..........,....,.(@@@@@@@@@@@@@@@@@@@@@@@@@@&@&,,******
-  " ....,.,*,*&/**,(@@@@@@@&..............(@@@@@@@@@@@@@@@@@@@@@@@@@@@&@@@&&&@@&/***
-  " ....,,***%/,,*&@@@@@@@@@@&/,...*(&@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&&&&&@&@@@@@(
-  " ....,,,*,&&&@@@@@@@@@&@&@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&&@@@@@@@@@@@@@@@
-
-  Plug 'tpope/vim-sensible'
-
-  " snippets and completion
-  Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets' | Plug 'Morantron/my-snippets'
-  Plug 'mattn/emmet-vim'
-
-  " file and buffer navigation
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  Plug 'junegunn/fzf.vim'
-  Plug 'scrooloose/nerdtree'
-  Plug 'tpope/vim-vinegar'
-  Plug 'jeetsukumaran/vim-buffergator'
-
-  " language/frameworks plugins
-  "Plug 'sheerun/vim-polyglot' " syntax highlight all the things
-  Plug 'tpope/vim-rails'
-  "Plug 'plasticboy/vim-markdown'
-
-  " i18n plugins
-  Plug 'VincentCordobes/vim-translate'
-  Plug 'lmeijvogel/vim-yaml-helper'
-  Plug 'mogelbrod/vim-jsonpath'
-
-  " edition
-  "Plug 'scrooloose/nerdcommenter'
-  Plug 'tpope/vim-repeat'
-  Plug 'tpope/vim-abolish'
-  Plug 'tpope/vim-surround'
-  Plug 'tpope/vim-unimpaired'
-  Plug 'AndrewRadev/sideways.vim'
-  Plug 'AndrewRadev/switch.vim'
-  Plug 'AndrewRadev/splitjoin.vim'
-  "Plug 'AndrewRadev/tagalong.vim' " not working?
-  Plug '907th/vim-auto-save'
-
-  " crazy edition
-  Plug 'vim-scripts/DrawIt'
-  "Plug 'dhruvasagar/vim-table-mode'
-
-  " git
-  Plug 'tpope/vim-fugitive' | Plug 'tpope/vim-rhubarb' | Plug 'shumphrey/fugitive-gitlab.vim'
-  Plug 'vim-scripts/ConflictMotions' |
-      \ Plug 'vim-scripts/CountJump' |
-      \ Plug 'vim-scripts/ingo-library' |
-      \ Plug 'tpope/vim-repeat' |
-      \ Plug 'vim-scripts/visualrepeat'
-  Plug 'airblade/vim-gitgutter'
-
-  " swag
-  "Plug 'vim-airline/vim-airline' | Plug 'vim-airline/vim-airline-themes'
-  Plug 'NLKNguyen/papercolor-theme'
-  Plug 'dracula/vim', { 'as': 'dracula' }
-  Plug 'kien/rainbow_parentheses.vim'
-  Plug 'bronson/vim-trailing-whitespace'
-  Plug 'nathanaelkane/vim-indent-guides'
-  Plug 'junegunn/vim-emoji'
-  "Plug 'ap/vim-css-color'
-  Plug 'chrisbra/Colorizer'
-  "Plug 'mhinz/vim-startify'
-
-  " slightly sensibler defaults
-  "   2 spaces tabs
-  set tabstop=2
-  set shiftwidth=2
-  set expandtab
-
-  "   show line numbers
-  set number
-
-  "   entering insert mode at proper indent level
-  filetype plugin indent on
-
-  "   allow to change buffers with unsaved changes
-  set hidden
-
-  " search
-  Plug 'romainl/vim-qf'
-  Plug 'mhinz/vim-grepper'
-
-  " linting and friends
-  Plug 'neovim/nvim-lspconfig'
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-  Plug 'glepnir/lspsaga.nvim'
-  "Plug 'w0rp/ale'
-
-  " zen mode
-  Plug 'junegunn/goyo.vim' | Plug 'junegunn/limelight.vim'
-
-  " tmux
-  Plug 'christoomey/vim-tmux-navigator'
-  Plug 'jpalardy/vim-slime'
-
-  " testing
-  Plug 'janko-m/vim-test'
-  Plug 'tpope/vim-dispatch'
-  "Plug 'neomake/neomake'
-
-  " trying out area, remove/categorize from time to time
-  Plug 'tidalcycles/vim-tidal'
-
-  call plug#end()
 " }}}
 
   "enables autochdir when entering insert mode ( relative path completion )
@@ -148,8 +8,8 @@
 
 " Colors {{{
   "set background=dark
-  let g:dracula_colorterm = 0
   "let g:dracula_italic = 0
+  let g:dracula_colorterm = 0
   colors dracula
 " }}}
 
@@ -241,6 +101,7 @@
   let g:UltiSnipsJumpBackwardTrigger="<c-K>"
   " add my-snippets to typescript too
   autocmd FileType javascriptreact,typescript,typescriptreact UltiSnipsAddFiletypes javascript
+
 " Rainbow parenthesis
   nnoremap <leader>rp :RainbowParenthesesToggle<cr>
   let g:rainbow_active = 1
@@ -253,40 +114,6 @@
   \ 'rest': { 'left': '#' },
   \ }
 
-" Goyo ( zen mode )
-  nnoremap <leader>z :Goyo<cr>
-  function! s:goyo_enter()
-    silent !tmux set status off
-    silent !tmux list-panes -F '\#F' | grep -q Z || tmux resize-pane -Z
-    "silent !change-gnome-terminal-profile 3
-    set noshowmode
-    set noshowcmd
-    colors PaperColor
-    set bg=light
-
-    " Disable showing ~ on blank lines
-    hi! EndOfBuffer ctermbg=bg ctermfg=bg guibg=bg guifg=bg
-    "set scrolloff=999
-    "Limelight
-  endfunction
-
-  function! s:goyo_leave()
-    silent !tmux set status on
-    silent !tmux list-panes -F '\#F' | grep -q Z && tmux resize-pane -Z
-    "silent !change-gnome-terminal-profile 2
-    set showmode
-    set showcmd
-    colors dracula
-    "set scrolloff=5
-    "Limelight!
-  endfunction
-
-  autocmd! User GoyoEnter nested call <SID>goyo_enter()
-  autocmd! User GoyoLeave nested call <SID>goyo_leave()
-
-
-  let g:goyo_width = 100
-  let g:goyo_height = "90%"
 
 " ale
 let g:ale_emit_conflict_warnings = 0
@@ -300,22 +127,6 @@ let g:ale_fixers = {
 \   'python': ['black'],
 \}
 
-
-let g:ale_ruby_rubocop_executable = 'bundle'
-
-" Disable by default, enable per project using direnv. Otherwise all projects
-" I contribute to will be mangled lol
-let g:ale_fix_on_save = 0
-
-
-" Ruby stuff
-  au BufRead,BufNewFile *.rabl setf ruby
-
-" Markdown
-  let g:instant_markdown_slow = 1
-  let g:vim_markdown_new_list_item_indent = 2
-  let g:vim_markdown_no_default_key_mappings = 1
-  autocmd BufWritePost *.md silent exec "!cat % | curl -s -XPUT -T - http://localhost:8090"
 
 " Emmet conf
 "let g:user_emmet_install_global = 1
