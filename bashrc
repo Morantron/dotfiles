@@ -22,8 +22,9 @@ bind -m vi-insert "\C-l":clear-screen
 bind -m vi-insert "\C-n":next-history
 bind -m vi-insert "\C-p":previous-history
 
-# le fancy PS1
-export PS1="🍕 \[$(tput bold)\]\[$(tput setaf 5)\]=> \[$(tput setaf 4)\]\w\[$(tput setaf 3)\] \[$(tput sgr0)\]"
+if [ -f ~/.profile ]; then
+  . ~/.profile
+fi
 
 if [ -f ~/.bash_functions ]; then
   . ~/.bash_functions
@@ -39,20 +40,25 @@ if [ -f /usr/share/git/completion/git-completion.bash ]; then
 fi
 
 #fzf stuff
-if [ -f /etc/profile.d/fzf.bash ]; then
-  . /etc/profile.d/fzf.bash
+if [ -f $HOME/.fzf.bash ]; then
+  . $HOME/.fzf.bash
 fi
 
-# TODO consistency o ke ase
-[[ -f $HOME/.gemrc_local ]] && export GEMRC=$HOME/.gemrc_local
+if [ -f $HOME/.gemrc_local ]; then
+  export GEMRC=$HOME/.gemrc_local
+fi
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash && export FZF_DEFAULT_COMMAND='git grep -l ""'
+#if [ -f ~/.fzf.bash ] && source ~/.fzf.bash && export FZF_DEFAULT_COMMAND='git grep -l ""'
+
+# le fancy PS1
+export PS1="🍕 \[$(tput bold)\]\[$(tput setaf 5)\]-> \[$(tput setaf 4)\]\w\[$(tput setaf 3)\] \[$(tput sgr0)\]"
+#export PS1="<3 \[$(tput bold)\]\[$(tput setaf 5)\]🡒  \[$(tput setaf 4)\]\w\[$(tput setaf 3)\] \[$(tput sgr0)\]" 
+
 
 if [ -z "$TMUX"  ]; then
   tmuxinator start notes --no-attach
   tmux new-session -A -s hello
 fi
 
-#[ -f ~/hacking/blurp/blurp.sh ] && source ~/hacking/blurp/blurp.sh
-
-#[ -f ~/hacking/tmux-inception/tmux-shim.sh ] && source ~/hacking/tmux-inception/tmux-shim.sh
+#export DIRENV_LOG_FORMAT=""
+#eval "$(direnv hook bash)"

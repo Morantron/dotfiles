@@ -1,32 +1,21 @@
-# ~/.profile: executed by the command interpreter for login shells.
-# This file is not read by bash(1), if ~/.bash_profile or ~/.bash_login
-# exists.
-# see /usr/share/doc/bash/examples/startup-files for examples.
-# the files are located in the bash-doc package.
-
-# the default umask is set in /etc/profile; for setting the umask
-# for ssh logins, install and configure the libpam-umask package.
-#umask 022
-
-ruby_version="2.4.0"
-
-# if running bash
-if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
-    fi
-fi
-
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
   PATH="$HOME/bin:$PATH"
 fi
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.gem/ruby/$ruby_version/bin" ] ; then
-  PATH="$HOME/.gem/ruby/$ruby_version/bin:$PATH"
-fi
+# ruby gem bins
+PATH="$PATH:$(ruby -e 'puts Gem.user_dir')/bin"
 
-# matrix lock shit
-xport LOCKPRG=$HOME/bin/matrix-lock
+# yarn bins
+PATH="$PATH:$HOME/.yarn/bin"
+
+PATH="$PATH:$HOME/hacking/grasshopper/bin/"
+
+export JAVA_HOME=/usr/lib/jvm/default
+export ANDROID_HOME="$HOME/Android/Sdk"
+
+# add ~/.local/bin
+PATH="$PATH:$HOME/.local/bin"
+
+# add rbenv shims
+PATH="$HOME/.rbenv/shims:$PATH"

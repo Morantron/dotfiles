@@ -8,3 +8,4 @@ alias sshr='rlwrap -a ssh'
 alias pomodoro='pomojs --log ~/.pomo.log --tmux'
 alias m=multi
 alias nau=nautilus
+alias cal='cal -m'

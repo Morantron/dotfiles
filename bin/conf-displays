@@ -1,24 +1,41 @@
 #!/usr/bin/env bash
 
-extern="DP1"
-intern="eDP1"
+external="HDMI-2"
+internal="DP-2"
 
-function internal_display() {
-  local mode="$1"
+ON="auto"
+OFF="off"
 
-  if [[ $mode == "off" ]]; then
-    xrandr --output $intern off --output $extern auto
-  else
-    xrandr --output $intern --mode "$mode"
-  fi
+function set_scaling_factor() {
+  dconf write /org/gnome/desktop/interface/text-scaling-factor "$1"
 }
 
-if [[ "$1" == "hidpi" ]]; then
-  internal_display "2560x1600"
-elif [[ "$1" == "lodpi" ]]; then
-  internal_display "1280x800"
-elif [[ "$1" == "external" ]]; then
-  internal_display "off"
-else
-  notify-send "conf-displays: $1? wtf?"
+function set_display() {
+  local display="$1"
+  local state="$2"
+
+  if [[ $state == "off" ]]; then
+    flag="$OFF"
+  else
+    flag="$ON"
+  fi
+
+  xrandr --output "$display" --$flag
+}
+
+if [[ "$1" == "external" ]]; then
+  set_scaling_factor 1.00
+  set_display "$internal" "off"
+  set_display "$external" "on"
+elif [[ "$1" == "internal" ]]; then
+  set_scaling_factor 1.25
+  set_display "$internal" "on"
+  set_display "$external" "off"
+elif [[ "$1" == "join-primary-internal" ]]; then
+  set_scaling_factor 1.00
+  xrandr --output "$internal" --"$ON" --primary --below "$external"
+  xrandr --output "$external" --"$ON"
+elif [[ "$1" == "join-primary-external" ]]; then
+  xrandr --output "$internal" --"$ON" --below "$external"
+  xrandr --output "$external" --"$ON" --primary
 fi

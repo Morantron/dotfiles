@@ -13,7 +13,7 @@
   ;status = auto
 ;[color "branch"]
   ;current = yellow reverse
-  ;local = yellow 
+  ;local = yellow
   ;remote = green
 ;[color "diff"]
   ;meta = blue bold
@@ -37,6 +37,8 @@
   cmd = git merge-file --theirs \"$CURRENT\" \"$BASE\" \"$OTHER\"
 [mergetool "ours"]
   cmd = git merge-file --ours \"$CURRENT\" \"$BASE\" \"$OTHER\"
+[pull]
+  rebase = false
 [push]
   default = simple
 [alias]
@@ -51,6 +53,8 @@
     gh-clone = "!f() { git clone git@github.com:$1; }; f"
     diffc = diff --cached
     current-branch = symbolic-ref --short HEAD
+    whoosh = "!f() { git commit -am 'WIP'; git push; }; f"
+    yolo = commit --no-verify
 [github]
   user = Morantron
 [filter "lfs"]

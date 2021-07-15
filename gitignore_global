@@ -4,3 +4,4 @@ vendor/cache/ruby
 .lvimrc
 .grasshopper_rc
 nohup.out
+.mypy_cache
