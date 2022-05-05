@@ -54,11 +54,9 @@ fi
 export PS1="🍕 \[$(tput bold)\]\[$(tput setaf 5)\]-> \[$(tput setaf 4)\]\w\[$(tput setaf 3)\] \[$(tput sgr0)\]"
 #export PS1="<3 \[$(tput bold)\]\[$(tput setaf 5)\]🡒  \[$(tput setaf 4)\]\w\[$(tput setaf 3)\] \[$(tput sgr0)\]" 
 
+#if [ -z "$TMUX"  ]; then
+  #tmux new-session -A -s hello
+#fi
 
-if [ -z "$TMUX"  ]; then
-  tmuxinator start notes --no-attach
-  tmux new-session -A -s hello
-fi
-
-#export DIRENV_LOG_FORMAT=""
-#eval "$(direnv hook bash)"
+export DIRENV_LOG_FORMAT=""
+eval "$(direnv hook bash)"

@@ -51,10 +51,11 @@ call plug#begin('~/.vim/plugged')
   Plug 'scrooloose/nerdtree'
   Plug 'tpope/vim-vinegar'
   Plug 'jeetsukumaran/vim-buffergator'
-  Plug 'nvim-telescope/telescope.nvim' | Plug 'nvim-lua/popup.nvim' | Plug 'nvim-lua/plenary.nvim'
+  Plug 'mhinz/vim-grepper'
+  "Plug 'nvim-telescope/telescope.nvim' | Plug 'nvim-lua/popup.nvim' | Plug 'nvim-lua/plenary.nvim'
 
   " language/frameworks plugins
-  "Plug 'sheerun/vim-polyglot' " syntax highlight all the things
+  Plug 'sheerun/vim-polyglot' " syntax highlight all the things
   Plug 'tpope/vim-rails'
   "Plug 'plasticboy/vim-markdown'
 
@@ -64,8 +65,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'mogelbrod/vim-jsonpath'
 
   " edition
-  "Plug 'scrooloose/nerdcommenter'
-  Plug 'tpope/vim-commentary'
+  Plug 'morantron/nerdcommenter' " using form to avoid <leader>ca conflict :facepalm:
+  "Plug 'tpope/vim-commentary'
   Plug 'tpope/vim-repeat'
   Plug 'tpope/vim-abolish'
   Plug 'tpope/vim-surround'
@@ -103,9 +104,9 @@ call plug#begin('~/.vim/plugged')
 
 
   " linting and friends
-  Plug 'nvim-lua/completion-nvim'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'neovim/nvim-lspconfig'
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  "Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'glepnir/lspsaga.nvim'
   "Plug 'w0rp/ale'
 
@@ -120,6 +121,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'janko-m/vim-test'
   Plug 'tpope/vim-dispatch'
   "Plug 'neomake/neomake'
+
+  Plug 'github/copilot.vim'
 
   " trying out area, remove/categorize from time to time
   Plug 'tidalcycles/vim-tidal'
@@ -175,6 +178,10 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" Increment/decrement numbers with cursor keys
+nnoremap <Up> <C-a>
+nnoremap <Down> <C-x>
+
 " cd to current buffer directory (removing because it conflicts with LSP
 " goodies)
 " nnoremap <leader>cd :cd %:p:h<cr>
@@ -182,6 +189,11 @@ nnoremap <C-l> <C-w>l
 " edit dotfiles
 nnoremap <leader>rc :e ~/.config/nvim/init.vim<CR>
 "}}}
+
+" provider confi
+"
+let g:python_host_prog  = '/usr/bin/python2'
+let g:python3_host_prog  = '/usr/bin/python3'
 
 " Per plugin config
 
@@ -242,7 +254,7 @@ let g:jsonpath_register = '"'
 
 autocmd FileType yaml call SetYAMLI18nMappings()
 autocmd FileType json call SetJSONI18nMappings()
-autocmd FileType javascript,javascript.jsx nnoremap <leader>yp i{I18n.t('pa')}
+autocmd FileType javascript,javascript.jsx nnoremap <leader>yp i{t('pa')}
 autocmd FileType eruby nnoremap <leader>yp i<%= t('pa') %>
 autocmd FileType haml nnoremap <leader>yp it('pa')
 "}}}
@@ -266,9 +278,6 @@ local nvim_lsp = require('lspconfig')
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-  --Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   -- Mappings.
   local opts = { noremap=true, silent=true }
@@ -337,7 +346,6 @@ nvim_lsp.tsserver.setup {
 
     client.resolved_capabilities.document_formatting = false
 
-    require'completion'.on_attach(client, bufnr)
   end
 }
 EOF
@@ -352,7 +360,7 @@ EOF
 " show hover doc
 nnoremap <silent>K :Lspsaga hover_doc<CR>
 inoremap <silent> <C-k> <Cmd>Lspsaga signature_help<CR>
-nnoremap <silent> cR <Cmd>Lspsaga lsp_finder<CR>
+nnoremap <silent> <leader>cR <Cmd>Lspsaga lsp_finder<CR>
 
 nnoremap <silent><leader>csd <cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>
 
@@ -362,16 +370,21 @@ nnoremap <silent><leader>ca :Lspsaga code_action<CR>
 vnoremap <silent><leader>ca :<C-U>Lspsaga range_code_action<CR>
 
 " rename
-nnoremap <silent>cr <cmd>lua require('lspsaga.rename').rename()<CR>
+"nnoremap <silent>cr <cmd>lua require('lspsaga.rename').rename()<CR>
 "
-nnoremap <silent>cr :Lspsaga rename<CR>
+nnoremap <silent><leader>cr :Lspsaga rename<CR>
 " close rename win use <C-c> in insert mode or `q` in noremal mode or `:q`
 "}}}
 
+"{{{coc.nvim
+"set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+"}}}
+
 "{{{ telescope
-nnoremap <leader><leader> :Telescope find_files<CR>
-nnoremap <leader>gg :Telescope live_grep<CR>
-nnoremap \g :Telescope grep_string<CR>
+nnoremap <leader><leader> :GFiles<CR>
+nnoremap <leader>gg :Grepper<CR>
+nnoremap \g :Grepper -cword -noprompt<cr>
+
 "}}}
 
 "{{{ vim-commentary
@@ -379,16 +392,13 @@ nmap <leader>cc <Plug>CommentaryLine
 vmap <leader>cc <Plug>Commentary
 "}}}
 
-"{{{ completion-nvim
-set completeopt=menuone,noinsert,noselect
-
 " Use <Tab> and <S-Tab> to navigate through popup menu
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+"inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
-let g:completion_confirm_key = ""
-imap <expr> <cr>  pumvisible() ? complete_info()["selected"] != "-1" ?
-                 \ "\<Plug>(completion_confirm_completion)"  : "\<c-e>\<CR>" :  "\<CR>"
+"let g:completion_confirm_key = ""
+"imap <expr> <cr>  pumvisible() ? complete_info()["selected"] != "-1" ?
+                 "\ "\<Plug>(completion_confirm_completion)"  : "\<c-e>\<CR>" :  "\<CR>"
 
 "}}}
 

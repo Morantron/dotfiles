@@ -93,7 +93,7 @@
   "nmap <leader>cgd  <Plug>(coc-definition)
   "nmap <leader>crn  <Plug>(coc-rename)
 
-  "set statusline+=%{coc#status()}
+  set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " UltiSnips conf
   let g:UltiSnipsExpandTrigger="<tab>"

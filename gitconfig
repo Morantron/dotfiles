@@ -47,7 +47,8 @@
     glog = log --graph
     ch = "!f() { git commit --allow-empty -m \"* $1\"; }; f"
     recent = !git for-each-ref --sort=-committerdate --format='%(refname:short)' refs/heads/ | grep -v develop | head -n 20
-    fixup = "!f() { git commit --fixup=$1; git rebase -i --autosquash $1~1; }; f"
+    fixup = "!f() { git commit --fixup=$1; }; f"
+    autofixup = "!f() { git commit --fixup=$1; git rebase -i --autosquash $1~1; }; f"
     amend = commit --amend --no-edit
     nav = "!f() { git recent | fzf | xargs git co; }; f"
     gh-clone = "!f() { git clone git@github.com:$1; }; f"

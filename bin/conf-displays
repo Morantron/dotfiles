@@ -28,7 +28,7 @@ if [[ "$1" == "external" ]]; then
   set_display "$internal" "off"
   set_display "$external" "on"
 elif [[ "$1" == "internal" ]]; then
-  set_scaling_factor 1.25
+  set_scaling_factor 1.50
   set_display "$internal" "on"
   set_display "$external" "off"
 elif [[ "$1" == "join-primary-internal" ]]; then

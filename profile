@@ -19,3 +19,11 @@ PATH="$PATH:$HOME/.local/bin"
 
 # add rbenv shims
 PATH="$HOME/.rbenv/shims:$PATH"
+
+# prepend isomorphic copy
+PATH="/opt/isomorphic-copy/bin:$PATH"
+
+PATH="$PATH:$HOME/go/bin"
+
+DENO_INSTALL="/home/morantron/.deno"
+PATH="$DENO_INSTALL/bin:$PATH"
