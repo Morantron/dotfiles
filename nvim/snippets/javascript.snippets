@@ -1,0 +1,7 @@
+snippet llog
+	console.log(\`$1\`, $1);
+
+# Capitalize vim regexp taken from
+#   https://stackoverflow.com/questions/17440659/capitalize-first-letter-of-each-word-in-a-selection-using-vim
+snippet ss
+	const [$1, set${1/\<./\u&/}] = useState($2);
