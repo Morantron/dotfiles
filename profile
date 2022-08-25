@@ -17,13 +17,14 @@ export ANDROID_HOME="$HOME/Android/Sdk"
 # add ~/.local/bin
 PATH="$PATH:$HOME/.local/bin"
 
-# add rbenv shims
-PATH="$HOME/.rbenv/shims:$PATH"
-
 # prepend isomorphic copy
-PATH="/opt/isomorphic-copy/bin:$PATH"
+#PATH="/opt/isomorphic-copy/bin:$PATH"
 
 PATH="$PATH:$HOME/go/bin"
 
 DENO_INSTALL="/home/morantron/.deno"
 PATH="$DENO_INSTALL/bin:$PATH"
+
+# npm system wide installtions
+PATH="$HOME/.local/bin:$PATH"
+export npm_config_prefix="$HOME/.local"

@@ -54,7 +54,7 @@ return require('packer').startup(function()
 
   use { 'jpalardy/vim-slime', branch = "main" }
 
-  use 'christoomey/vim-tmux-navigator'
+  --use 'christoomey/vim-tmux-navigator'
 
   use 'scrooloose/nerdtree'
 
@@ -70,6 +70,8 @@ return require('packer').startup(function()
   use 'dcampos/cmp-snippy'
   use "hrsh7th/cmp-nvim-lsp"
   use "hrsh7th/cmp-nvim-lua"
+
+  use 'mattn/emmet-vim'
 
   -- snippets
   use 'dcampos/nvim-snippy'
@@ -94,8 +96,7 @@ return require('packer').startup(function()
 
   use "lewis6991/gitsigns.nvim"
 
-  use "github/copilot.vim"
-
+  --use "github/copilot.vim"
 
   -- You can alias plugin names
   use {'dracula/vim', as = 'dracula'}

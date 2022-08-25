@@ -18,8 +18,6 @@ lsp_installer.on_server_ready(function(server)
     opts = vim.tbl_deep_extend("force", sumneko_opts, opts)
   end
 
-  --print(server.name)
-
   if server.name == "denols" then
     local denols_opts = require("user.lsp.settings.denols")
     opts = vim.tbl_deep_extend("force", denols_opts, opts)

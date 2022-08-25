@@ -53,6 +53,7 @@
     nav = "!f() { git recent | fzf | xargs git co; }; f"
     gh-clone = "!f() { git clone git@github.com:$1; }; f"
     diffc = diff --cached
+    difft = "!f() { GIT_EXTERNAL_DIFF=difft git diff $1; }; f"
     current-branch = symbolic-ref --short HEAD
     whoosh = "!f() { git commit -am 'WIP'; git push; }; f"
     yolo = commit --no-verify

@@ -39,10 +39,8 @@ if [ -f /usr/share/git/completion/git-completion.bash ]; then
   . /usr/share/git/completion/git-completion.bash
 fi
 
-#fzf stuff
-if [ -f $HOME/.fzf.bash ]; then
-  . $HOME/.fzf.bash
-fi
+source /usr/share/fzf/key-bindings.bash
+source /usr/share/fzf/completion.bash
 
 if [ -f $HOME/.gemrc_local ]; then
   export GEMRC=$HOME/.gemrc_local
@@ -52,6 +50,7 @@ fi
 
 # le fancy PS1
 export PS1="🍕 \[$(tput bold)\]\[$(tput setaf 5)\]-> \[$(tput setaf 4)\]\w\[$(tput setaf 3)\] \[$(tput sgr0)\]"
+#export PS1="\[$(tput bold)\]\[$(tput setaf 5)\]-> \[$(tput setaf 4)\]\w\[$(tput setaf 3)\] \[$(tput sgr0)\]"
 #export PS1="<3 \[$(tput bold)\]\[$(tput setaf 5)\]🡒  \[$(tput setaf 4)\]\w\[$(tput setaf 3)\] \[$(tput sgr0)\]" 
 
 #if [ -z "$TMUX"  ]; then
