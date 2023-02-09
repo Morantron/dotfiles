@@ -90,6 +90,8 @@ return require('packer').startup(function()
     run = ":TSUpdate",
   }
 
+  use "vim-crystal/vim-crystal"
+
   -- Comment stuff
   use "morantron/nerdcommenter" -- Easily comment stuff
   --use "JoosepAlviste/nvim-ts-context-commentstring" TODO
@@ -100,4 +102,8 @@ return require('packer').startup(function()
 
   -- You can alias plugin names
   use {'dracula/vim', as = 'dracula'}
+
+  use '~/hacking/neovim-test'
+
+  use 'sunjon/shade.nvim'
 end)

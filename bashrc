@@ -59,3 +59,6 @@ export PS1="🍕 \[$(tput bold)\]\[$(tput setaf 5)\]-> \[$(tput setaf 4)\]\w\[$(
 
 export DIRENV_LOG_FORMAT=""
 eval "$(direnv hook bash)"
+
+export EDITOR=nvim
+. "$HOME/.cargo/env"

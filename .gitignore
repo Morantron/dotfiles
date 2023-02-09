@@ -2,3 +2,4 @@ bin/*
 !bin/conf-displays
 
 nvim/plugin/*
+nvim/pack/*

@@ -26,6 +26,9 @@ keymap("n", "<leader>gs", "<cmd>Git<cr>", opts)
 vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 keymap("n", "<leader>cf", ":Format<cr>", opts)
 
+keymap("n", "<leader>co", ':lua vim.lsp.buf.execute_command({command = "_typescript.organizeImports", arguments = {vim.fn.expand("%:p")}})<CR>', opts)
+
+
 keymap("n", "<leader>hl", ":set hlsearch!<CR>", opts)
 
 keymap(
