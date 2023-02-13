@@ -76,7 +76,7 @@ return require('packer').startup(function()
   --  │   " ....,.,*,*&/**,(@@@@@@@&..............(@@@@@@@@@@@@@@@@@@@@@@@@@@@&@@@&&&@@&/***
   --  │   " ....,,***%/,,*&@@@@@@@@@@&/,...*(&@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&&&&&@&@@@@@(
   --  │   " ....,,,*,&&&@@@@@@@@@&@&@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&&@@@@@@@@@@@@@@@
-  use 'tpope/vim-sensible'
+  use { 'tpope/vim-sensible', config = function() require('user.sensibler') end }
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
   use 'tpope/vim-vinegar'
@@ -87,7 +87,7 @@ return require('packer').startup(function()
   use 'tpope/vim-rails'
   use 'tpope/vim-dispatch'
 
-  use { 'jpalardy/vim-slime', branch = "main" }
+  use { 'jpalardy/vim-slime', branch = "main", config = function () require('user.slime') end }
 
   --use 'christoomey/vim-tmux-navigator'
 
@@ -98,7 +98,7 @@ return require('packer').startup(function()
   use "nvim-lua/plenary.nvim"
 
   --- completion
-  use "hrsh7th/nvim-cmp"
+  use { "hrsh7th/nvim-cmp", config = function() require('user.cmp') end }
   use "hrsh7th/cmp-buffer"
   use "hrsh7th/cmp-path"
   use "hrsh7th/cmp-cmdline"
@@ -109,7 +109,7 @@ return require('packer').startup(function()
   use 'mattn/emmet-vim'
 
   -- snippets
-  use 'dcampos/nvim-snippy'
+  use { 'dcampos/nvim-snippy', config = function() require('user.snippets') end }
   use 'honza/vim-snippets'
   use 'jose-elias-alvarez/null-ls.nvim'
 
@@ -117,11 +117,12 @@ return require('packer').startup(function()
   use "neovim/nvim-lspconfig"
   use "williamboman/nvim-lsp-installer"
 
-  use "nvim-telescope/telescope.nvim"
+  use { "nvim-telescope/telescope.nvim", config = function() require('user.telescope') end }
 
   -- Treesitter
   use {
     "nvim-treesitter/nvim-treesitter",
+    config = function() require('user.treesitter') end,
     run = ":TSUpdate",
   }
 
@@ -131,7 +132,7 @@ return require('packer').startup(function()
   use "morantron/nerdcommenter" -- Easily comment stuff
   --use "JoosepAlviste/nvim-ts-context-commentstring" TODO
 
-  use "lewis6991/gitsigns.nvim"
+  use { "lewis6991/gitsigns.nvim", config = function() require('user.gitsigns') end }
 
   --use "github/copilot.vim"
 
