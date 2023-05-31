@@ -27,5 +27,4 @@ PATH="$DENO_INSTALL/bin:$PATH"
 
 # npm system wide installtions
 PATH="$HOME/.local/bin:$PATH"
-export npm_config_prefix="$HOME/.local"
 . "$HOME/.cargo/env"

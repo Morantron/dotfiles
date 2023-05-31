@@ -2,7 +2,7 @@ require "plugins"
 
 --require "user.sensibler"
 --require "user.cmp"
---require "user.lsp"
+require "user.lsp"
 require "user.keymaps"
 --require "user.telescope"
 --require "user.treesitter"
