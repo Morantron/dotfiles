@@ -111,11 +111,12 @@ return require('packer').startup(function()
   -- snippets
   use { 'dcampos/nvim-snippy', config = function() require('user.snippets') end }
   use 'honza/vim-snippets'
-  use 'jose-elias-alvarez/null-ls.nvim'
 
   -- LSP
+  use { "williamboman/mason.nvim", run = ":MasonUpdate", config = function() require('user.mason') end }
+  use "williamboman/mason-lspconfig.nvim"
   use "neovim/nvim-lspconfig"
-  use { "williamboman/mason.nvim", run = ":MasonUpdate", config = function() require('mason').setup() end }
+  use 'jose-elias-alvarez/null-ls.nvim'
 
   use { "nvim-telescope/telescope.nvim", config = function() require('user.telescope') end }
 
@@ -134,31 +135,9 @@ return require('packer').startup(function()
 
   use { "lewis6991/gitsigns.nvim", config = function() require('user.gitsigns') end }
 
-  use {
-    "github/copilot.vim",
-    config = function () require('user.copilot') end,
-  }
-
   --use {
-    --"zbirenbaum/copilot.lua",
-    --cmd = "Copilot",
-    --event = "InsertEnter",
-    --config = function()
-      --require("copilot").setup({
-        --suggestion = {
-          --enabled = true,
-          --auto_trigger = true
-        --},
-      --})
-    --end,
-  --}
-
-  --use {
-    --"zbirenbaum/copilot-cmp",
-    --after = { "copilot.lua" },
-    --config = function ()
-      --require("copilot_cmp").setup()
-    --end
+    --"github/copilot.vim",
+    --config = function () require('user.copilot') end,
   --}
 
   -- You can alias plugin names

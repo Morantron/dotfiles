@@ -1,3 +1,4 @@
+-- global vim
 local M = {}
 
 -- TODO: backfill this to template
@@ -62,6 +63,7 @@ end
 
 -- TODO just move these keymaps to keymaps.lua
 local function lsp_keymaps(bufnr)
+  print("setting keymaps")
   local opts = { noremap = true, silent = true }
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "cd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
@@ -82,25 +84,23 @@ local function lsp_keymaps(bufnr)
   --)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "]d", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
-  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format()' ]]
+  print("setting keymaps finish")
 end
 
 M.on_attach = function(client, bufnr)
-  if client.name == "tsserver" then
-    client.resolved_capabilities.document_formatting = false
-  end
-  print("YOWAT")
-  print(client)
-  print(buffer)
+  print("attached??", bufnr)
+  print(vim.inspect(client.capabilities))
+  --if client.name == "tsserver" then
+    --client.resolved_capabilities.document_formatting = false
+  --end
   lsp_keymaps(bufnr)
   lsp_highlight_document(client)
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-
 local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not status_ok then
-  return
+  return M
 end
 
 M.capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
