@@ -135,10 +135,10 @@ return require('packer').startup(function()
 
   use { "lewis6991/gitsigns.nvim", config = function() require('user.gitsigns') end }
 
-  --use {
-    --"github/copilot.vim",
-    --config = function () require('user.copilot') end,
-  --}
+  use {
+    "github/copilot.vim",
+    config = function () require('user.copilot') end,
+  }
 
   -- You can alias plugin names
   use {'dracula/vim', as = 'dracula'}
