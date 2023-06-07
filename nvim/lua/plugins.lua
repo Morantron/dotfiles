@@ -109,7 +109,7 @@ return require('packer').startup(function()
   use 'mattn/emmet-vim'
 
   -- snippets
-  use { 'dcampos/nvim-snippy', config = function() require('user.snippets') end }
+  use 'dcampos/nvim-snippy'
   use 'honza/vim-snippets'
 
   -- LSP
@@ -133,7 +133,7 @@ return require('packer').startup(function()
   use "morantron/nerdcommenter" -- Easily comment stuff
   --use "JoosepAlviste/nvim-ts-context-commentstring" TODO
 
-  use { "lewis6991/gitsigns.nvim", config = function() require('user.gitsigns') end }
+  use { "lewis6991/gitsigns.nvim", config = function() require('gitsigns').setup() end }
 
   use {
     "github/copilot.vim",
