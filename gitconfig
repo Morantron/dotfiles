@@ -58,6 +58,7 @@
     whoosh = "!f() { git commit -am 'WIP'; git push; }; f"
     wip = commit -am wip
     yolo = commit --no-verify
+    tree = "!f() { git ls-files | tree --fromfile; }; f"
 [github]
   user = Morantron
 [filter "lfs"]
