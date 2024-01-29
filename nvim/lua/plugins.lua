@@ -116,7 +116,7 @@ return require('packer').startup(function()
   use { "williamboman/mason.nvim", run = ":MasonUpdate", config = function() require('user.mason') end }
   use "williamboman/mason-lspconfig.nvim"
   use "neovim/nvim-lspconfig"
-  use 'jose-elias-alvarez/null-ls.nvim'
+  use 'nvimtools/none-ls.nvim'
 
   use { "nvim-telescope/telescope.nvim", config = function() require('user.telescope') end }
 

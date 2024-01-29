@@ -15,7 +15,7 @@ keymap("n", "\\g", "<cmd>Telescope grep_string<cr>", opts)
 keymap("n", "<leader>gd", "<cmd>Gvdiff<cr>", opts)
 keymap("n", "<leader>gs", "<cmd>Git<cr>", opts)
 
-vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format()' ]]
 keymap("n", "<leader>cf", ":Format<cr>", opts)
 
 keymap("n", "<leader>co", ':lua vim.lsp.buf.execute_command({command = "_typescript.organizeImports", arguments = {vim.fn.expand("%:p")}})<CR>', opts)

@@ -47,8 +47,8 @@ null_ls.setup {
     --diagnostics.eslint,
     formatting.prettier,
     formatting.stylua,
-    diagnostics.rubocop,
-    --formatting.standardrb,
-    --diagnostics.standardrb,
+    --diagnostics.rubocop,
+    formatting.standardrb,
+    diagnostics.standardrb,
   },
 }
