@@ -50,8 +50,9 @@ fi
 
 # le fancy PS1
 export PS1="🍕 \[$(tput bold)\]\[$(tput setaf 5)\]-> \[$(tput setaf 4)\]\w\[$(tput setaf 3)\] \[$(tput sgr0)\]"
-#export PS1="\[$(tput bold)\]\[$(tput setaf 5)\]-> \[$(tput setaf 4)\]\w\[$(tput setaf 3)\] \[$(tput sgr0)\]"
-#export PS1="<3 \[$(tput bold)\]\[$(tput setaf 5)\]🡒  \[$(tput setaf 4)\]\w\[$(tput setaf 3)\] \[$(tput sgr0)\]" 
+
+# prompt for vhs
+#export PS1="\[$(tput bold)\]\[$(tput setaf 4)\] > \[$(tput sgr0)\]"
 
 #if [ -z "$TMUX"  ]; then
   #tmux new-session -A -s hello
