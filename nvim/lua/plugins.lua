@@ -145,6 +145,20 @@ return require('packer').startup(function()
 
   use 'sunjon/shade.nvim'
 
+  use({
+    "iamcco/markdown-preview.nvim",
+    run = "cd app && npm install",
+    setup = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+      vim.g.mkdp_open_to_the_world = 1
+      vim.g.mkdp_port = 4747
+      vim.g.mkdp_echo_preview_url = 1
+      vim.g.mkdp_theme = 'light'
+      vim.g.mkdp_markdown_css = "/home/morantron/.config/nvim/lua/user/markdown.css"
+    end,
+    ft = { "markdown" },
+  })
+
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if PACKER_BOOTSTRAP then
