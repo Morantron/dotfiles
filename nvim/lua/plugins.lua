@@ -80,6 +80,12 @@ return require('packer').startup(function()
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
   use 'tpope/vim-vinegar'
+  use({
+    "stevearc/oil.nvim",
+    config = function()
+      require("oil").setup()
+    end,
+  })
   use 'tpope/vim-repeat'
   use 'tpope/vim-abolish'
   use 'tpope/vim-surround'
@@ -134,11 +140,6 @@ return require('packer').startup(function()
   --use "JoosepAlviste/nvim-ts-context-commentstring" TODO
 
   use { "lewis6991/gitsigns.nvim", config = function() require('gitsigns').setup() end }
-
-  use {
-    "github/copilot.vim",
-    config = function () require('user.copilot') end,
-  }
 
   -- You can alias plugin names
   use {'dracula/vim', as = 'dracula'}
