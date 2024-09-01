@@ -3,9 +3,6 @@ if [ -d "$HOME/bin" ] ; then
   PATH="$HOME/bin:$PATH"
 fi
 
-# ruby gem bins
-PATH="$PATH:$(ruby -e 'puts Gem.user_dir')/bin"
-
 # yarn bins
 PATH="$PATH:$HOME/.yarn/bin"
 
@@ -27,4 +24,3 @@ PATH="$DENO_INSTALL/bin:$PATH"
 
 # npm system wide installtions
 PATH="$HOME/.local/bin:$PATH"
-. "$HOME/.cargo/env"

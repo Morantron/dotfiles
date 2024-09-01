@@ -34,6 +34,10 @@ if [ -f ~/.bash_aliases ]; then
   . ~/.bash_aliases
 fi
 
+if [ -f ~/.asdf/asdf.sh ]; then
+  . ~/.asdf/asdf.sh 
+fi
+
 #git stuff
 if [ -f /usr/share/git/completion/git-completion.bash ]; then
   . /usr/share/git/completion/git-completion.bash
@@ -46,27 +50,13 @@ if [ -f $HOME/.gemrc_local ]; then
   export GEMRC=$HOME/.gemrc_local
 fi
 
-#if [ -f ~/.fzf.bash ] && source ~/.fzf.bash && export FZF_DEFAULT_COMMAND='git grep -l ""'
-
 # le fancy PS1
-export PS1="🍕 \[$(tput bold)\]\[$(tput setaf 5)\]-> \[$(tput setaf 4)\]\w\[$(tput setaf 3)\] \[$(tput sgr0)\]"
+export PS1="🍕 \[\e[1m\]\[\e[35m\]-> \[\e[34m\]\w\[\e[33m\] \[\e[0m\]"
 
 # prompt for vhs
 #export PS1="\[$(tput bold)\]\[$(tput setaf 4)\] > \[$(tput sgr0)\]"
 
-#if [ -z "$TMUX"  ]; then
-  #tmux new-session -A -s hello
-#fi
-
-export DIRENV_LOG_FORMAT=""
-eval "$(direnv hook bash)"
-
-export EDITOR=nvim
 . "$HOME/.cargo/env"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export HOST_UID=$(id -u)
-export HOST_GID=$(id -g)
+# i use neovim btw
+export EDITOR=nvim
