@@ -70,4 +70,11 @@ return {
 
   { "vim-crystal/vim-crystal" },
   { 'morantron/nerdcommenter' },
+
+  {
+    "lewis6991/gitsigns.nvim",
+    config = function()
+      require('gitsigns').setup()
+    end,
+  },
 }
