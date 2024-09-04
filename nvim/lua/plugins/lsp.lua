@@ -25,7 +25,6 @@ return {
       local diagnostics = null_ls.builtins.diagnostics
 
       local api = vim.api
-      print("cwd: " .. vim.loop.cwd())
 
       null_ls.setup {
         debug = false,
