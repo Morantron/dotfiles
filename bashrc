@@ -60,8 +60,10 @@ if [ -f $HOME/.gemrc_local ]; then
   export GEMRC=$HOME/.gemrc_local
 fi
 
+HOST_PS1=${HOST_PS1:=🍕 }
+
 # le fancy PS1
-export PS1="🍕 $HOST_PS1\[\e[1m\]\[\e[35m\]-> \[\e[34m\]\w\[\e[33m\] \[\e[0m\]"
+export PS1="$HOST_PS1\[\e[1m\]\[\e[35m\]-> \[\e[34m\]\w\[\e[33m\] \[\e[0m\]"
 
 # prompt for vhs
 #export PS1="\[$(tput bold)\]\[$(tput setaf 4)\] > \[$(tput sgr0)\]"
