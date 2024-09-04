@@ -43,8 +43,13 @@ if [ -f /usr/share/git/completion/git-completion.bash ]; then
   . /usr/share/git/completion/git-completion.bash
 fi
 
-source /usr/share/fzf/key-bindings.bash
-source /usr/share/fzf/completion.bash
+if [ -f /usr/share/fzf/key-bindings.bash ]; then
+  . /usr/share/fzf/key-bindings.bash
+fi
+
+if [ -f /usr/share/fzf/completion.bash ]; then
+  . /usr/share/fzf/completion.bash
+fi
 
 if [ -f $HOME/.gemrc_local ]; then
   export GEMRC=$HOME/.gemrc_local
