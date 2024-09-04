@@ -26,6 +26,11 @@ if [ -f ~/.profile ]; then
   . ~/.profile
 fi
 
+if [ -f ~/.profile.local ]; then
+  . ~/.profile.local
+fi
+
+
 if [ -f ~/.bash_functions ]; then
   . ~/.bash_functions
 fi
@@ -56,7 +61,7 @@ if [ -f $HOME/.gemrc_local ]; then
 fi
 
 # le fancy PS1
-export PS1="🍕 \[\e[1m\]\[\e[35m\]-> \[\e[34m\]\w\[\e[33m\] \[\e[0m\]"
+export PS1="🍕 $HOST_PS1\[\e[1m\]\[\e[35m\]-> \[\e[34m\]\w\[\e[33m\] \[\e[0m\]"
 
 # prompt for vhs
 #export PS1="\[$(tput bold)\]\[$(tput setaf 4)\] > \[$(tput sgr0)\]"
