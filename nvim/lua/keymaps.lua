@@ -23,6 +23,7 @@ vim.cmd [[ command! Format execute 'lua vim.lsp.buf.format()' ]]
 keymap("n", "<leader>cf", ":Format<cr>", opts)
 
 keymap("n", "<leader>co", ':lua vim.lsp.buf.execute_command({command = "_typescript.organizeImports", arguments = {vim.fn.expand("%:p")}})<CR>', opts)
+keymap("n", "<leader>cr", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
 keymap("n", "cd", "<cmd>lua vim.lsp.buf.definition()<CR>", opts)
 keymap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
 keymap("n", "<leader>cR", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
