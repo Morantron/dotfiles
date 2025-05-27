@@ -28,4 +28,15 @@ require("lazy").setup({
   install = { colorscheme = { "dracula" } },
   -- automatically check for plugin updates
   checker = { enabled = true, notify = false },
+
+  rocks = {
+    enabled = true,
+    root = vim.fn.stdpath("data") .. "/lazy-rocks",
+    server = "https://nvim-neorocks.github.io/rocks-binaries/",
+    -- use hererocks to install luarocks?
+    -- set to `nil` to use hererocks when luarocks is not found
+    -- set to `true` to always use hererocks
+    -- set to `false` to always use luarocks
+    hererocks = nil,
+  },
 })
