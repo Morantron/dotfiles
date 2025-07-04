@@ -20,6 +20,9 @@ return {
           -- Instead of true it can also be a list of languages
           additional_vim_regex_highlighting = false,
         },
+
+        -- this repo seems to be gone from the internets https://github.com/nvim-treesitter/nvim-treesitter/issues/7941
+        ignore_install = { "ipkg" },
       }
     end,
     build = ":TSUpdate"

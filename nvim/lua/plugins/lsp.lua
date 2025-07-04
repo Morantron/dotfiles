@@ -6,10 +6,10 @@ return {
     config = function()
       require("mason").setup()
       require("mason-lspconfig").setup({
-          ensure_installed = { "lua_ls", "solargraph", "tsserver" }
+          ensure_installed = { "lua_ls", "solargraph", "ts_ls" }
       })
 
-      require("lspconfig").tsserver.setup({})
+      require("lspconfig").ts_ls.setup({})
     end
   },
   { "williamboman/mason-lspconfig.nvim" },
